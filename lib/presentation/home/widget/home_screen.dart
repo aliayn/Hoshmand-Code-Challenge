@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hoshmand_code_challenge/const/resource.dart';
 import 'package:hoshmand_code_challenge/core/base/base_stateless.dart';
+import 'package:hoshmand_code_challenge/presentation/home/widget/progress_wheel.dart';
 
 class HomeScreen extends BaseStateless {
   const HomeScreen({super.key});
@@ -32,85 +34,16 @@ class HomeScreen extends BaseStateless {
             ),
           ),
           
-          // New bottom component
+          // Bottom progress bar
           Positioned(
             bottom: 0,
             left: 0,
             right: 0,
-            child: Container(
-              height: 181,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 12,
-                  ),
-                ],
-              ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  // Background rectangle
-                  Container(
-                    width: 88,
-                    height: 168,
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF7588EB).withOpacity(0.08),
-                    ),
-                  ),
-                  
-                  // Progress indicator and icon
-                  SizedBox(
-                    width: 98,
-                    height: 98,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        // Background circle
-                        Container(
-                          width: 88,
-                          height: 88,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Color(0xFFEDEDED),
-                          ),
-                        ),
-                        
-                        // Progress circle
-                        CircularProgressIndicator(
-                          value: 0.75, // Adjust progress value as needed
-                          backgroundColor: Colors.transparent,
-                          valueColor: const AlwaysStoppedAnimation<Color>(
-                            Color(0xFF7588EB),
-                          ),
-                          strokeWidth: 8,
-                        ),
-                        
-                        // Math icon
-                        Container(
-                          width: 66,
-                          height: 66,
-                          decoration: const BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Color(0xFF00A28B),
-                                Color(0xFF003128),
-                              ],
-                            ),
-                          ),
-                          child: const Icon(
-                            Icons.calculate,
-                            color: Colors.white,
-                            size: 32,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+            child: ProgressWheel(
+              subject: SubjectItem(
+                name: "ادبیات",
+                svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
+                progress: 0.75,
               ),
             ),
           ),
@@ -118,6 +51,10 @@ class HomeScreen extends BaseStateless {
       ),
     );
   }
+}
+
+class BottomProgressBar {
+  const BottomProgressBar();
 }
 
 class ChapterCard extends StatelessWidget {
