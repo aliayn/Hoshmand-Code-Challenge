@@ -19,7 +19,7 @@ class DataException implements Exception {
         message = LocaleKeys.errorReceiveTimeout;
         break;
       case DioExceptionType.unknown:
-        // message = _handleError(dioError.response!.statusCode!);
+        message = _handleError(dioError.response!.statusCode!);
         break;
       case DioExceptionType.sendTimeout:
         message = LocaleKeys.errorSendTimeout;

@@ -1,168 +1,199 @@
 import 'package:flutter/material.dart';
-import 'dart:math' as math;
-
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_custom_carousel/flutter_custom_carousel.dart';
+import 'dart:math' as math;
 
 class SubjectItem {
   final String name;
   final String svgIcon;
   final double progress;
+  final Color iconColor;
+  final bool isSelected;
 
   SubjectItem({
     required this.name,
     required this.svgIcon,
     required this.progress,
+    required this.iconColor,
+    this.isSelected = false,
   });
 }
 
 class ProgressWheel extends StatefulWidget {
-  final SubjectItem subject;
-  final double size;
-  final Color progressColor;
-  final Color backgroundColor;
+  final List<SubjectItem> subjects;
+  final double height;
+  final VoidCallback? onTap;
 
   const ProgressWheel({
     super.key,
-    required this.subject,
-    this.size = 98,
-    this.progressColor = const Color(0xFF7588EB),
-    this.backgroundColor = const Color(0xFFEDEDED),
+    required this.subjects,
+    this.height = 100,
+    this.onTap,
   });
 
   @override
   State<ProgressWheel> createState() => _ProgressWheelState();
 }
 
-class _ProgressWheelState extends State<ProgressWheel>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  double _startRotation = 0.0;
-  double _endRotation = 0.0;
+class _ProgressWheelState extends State<ProgressWheel> {
+  late CustomCarouselScrollController _scrollController;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: this,
-    );
+    _scrollController = CustomCarouselScrollController();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _scrollController.dispose();
     super.dispose();
-  }
-
-  void _onPanUpdate(DragUpdateDetails details) {
-    setState(() {
-      final RenderBox box = context.findRenderObject() as RenderBox;
-      final center = box.size.center(Offset.zero);
-      final angle = math.atan2(
-        details.localPosition.dy - center.dy,
-        details.localPosition.dx - center.dx,
-      );
-      _endRotation = angle;
-
-      // Calculate rotation direction and animate
-      final rotationDiff = _endRotation - _startRotation;
-      _controller.value = rotationDiff / (2 * math.pi);
-    });
-  }
-
-  void _onPanStart(DragStartDetails details) {
-    final RenderBox box = context.findRenderObject() as RenderBox;
-    final center = box.size.center(Offset.zero);
-    _startRotation = math.atan2(
-      details.localPosition.dy - center.dy,
-      details.localPosition.dx - center.dx,
-    );
-  }
-
-  void _onPanEnd(DragEndDetails details) {
-    _startRotation = _endRotation;
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onPanStart: _onPanStart,
-      onPanUpdate: _onPanUpdate,
-      onPanEnd: _onPanEnd,
-      child: Container(
-        width: widget.size,
-        height: widget.size,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            // Background circle
-            Container(
-              width: widget.size - 10,
-              height: widget.size - 10,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: widget.backgroundColor,
+    final screenWidth = MediaQuery.of(context).size.width;
+    final itemCount = widget.subjects.length;
+    final visibleItems = (itemCount - 1) ~/ 2;
+    
+    return SizedBox(
+      height: widget.height,
+      width: screenWidth * 1.5,
+      child: CustomCarousel(
+        children: widget.subjects.map((subject) => 
+          SizedBox(
+            width: screenWidth * 0.25,
+            child: _buildSubjectWidget(subject),
+          )
+        ).toList(),
+        effectsBuilder: (index, scrollRatio, child) {
+          final angle = (scrollRatio * math.pi) / 2;
+          final radius = screenWidth * 0.15;
+          final x = radius * math.sin(angle);
+          
+          final scale = 1.0 - (scrollRatio.abs() * 0.2).clamp(0.0, 0.2);
+          final opacity = 1.0 - (scrollRatio.abs() * 0.4).clamp(0.0, 0.4);
+          
+          return Transform(
+            transform: Matrix4.identity()
+              ..setEntry(3, 2, 0.001)
+              ..translate(x, 0.0)
+              ..scale(scale),
+            alignment: Alignment.center,
+            child: Opacity(
+              opacity: opacity,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                child: child,
               ),
             ),
-
-            // Progress circle
-            Transform.rotate(
-              angle: _endRotation,
-              child: CircularProgressIndicator(
-                value: widget.subject.progress,
-                backgroundColor: Colors.transparent,
-                valueColor: AlwaysStoppedAnimation<Color>(widget.progressColor),
-                strokeWidth: 8,
-              ),
-            ),
-
-            // Subject icon and name
-            Transform.rotate(
-              angle: _endRotation,
-              child: _buildSubjectWidget(),
-            ),
-          ],
+          );
+        },
+        controller: _scrollController,
+        onSelectedItemChanged: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+          widget.onTap?.call();
+        },
+        scrollDirection: Axis.horizontal,
+        itemCountBefore: visibleItems,
+        itemCountAfter: visibleItems,
+        loop: true,
+        tapToSelect: true,
+        scrollSpeed: 1.0,
+        physics: const CustomCarouselScrollPhysics(
+          sticky: true,
+          stiffness: 0.7,
         ),
+        alignment: Alignment.center,
+        depthOrder: DepthOrder.selectedInFront,
       ),
     );
   }
 
-  Widget _buildSubjectWidget() {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          width: 66,
-          height: 66,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color(0xFF00A28B),
-                Color(0xFF003128),
-              ],
+  Widget _buildSubjectWidget(SubjectItem subject) {
+    final isSelected = widget.subjects.indexOf(subject) == _selectedIndex;
+    
+    return Container(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              SizedBox(
+                width: 48,
+                height: 48,
+                child: CircularProgressIndicator(
+                  value: subject.progress,
+                  backgroundColor: Colors.white,
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    isSelected ? const Color(0xFFFFB800) : Colors.transparent,
+                  ),
+                  strokeWidth: 2,
+                ),
+              ),
+              Container(
+                width: 44,
+                height: 44,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.05),
+                      blurRadius: 4,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Center(
+                  child: SvgPicture.asset(
+                    subject.svgIcon,
+                    width: 24,
+                    height: 24,
+                    color: subject.iconColor,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            subject.name,
+            style: TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w500,
+              color: isSelected ? Colors.black : Colors.black54,
             ),
-            shape: BoxShape.circle,
           ),
-          child: Center(
-            child: SvgPicture.asset(
-              widget.subject.svgIcon,
-              width: 32,
-              height: 32,
-              color: Colors.white,
+          if (isSelected)
+            Padding(
+              padding: const EdgeInsets.only(top: 4),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SvgPicture.asset(
+                    'assets/icons/clock.svg',
+                    width: 14,
+                    height: 14,
+                    color: Colors.black54,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    '02:30',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.black54,
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ),
-        const SizedBox(height: 4),
-        Text(
-          widget.subject.name,
-          style: const TextStyle(
-            fontSize: 12,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

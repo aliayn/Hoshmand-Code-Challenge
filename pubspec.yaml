@@ -34,6 +34,7 @@ dependencies:
   http_parser: ^4.0.2
   json_annotation: ^4.9.0
   dartz: ^0.10.1
+  flutter_custom_carousel: ^0.1.0+1
 
 dev_dependencies:
   flutter_test:

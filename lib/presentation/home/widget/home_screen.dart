@@ -40,21 +40,44 @@ class HomeScreen extends BaseStateless {
             left: 0,
             right: 0,
             child: ProgressWheel(
-              subject: SubjectItem(
-                name: "ادبیات",
-                svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
-                progress: 0.75,
-              ),
+              height: 150,
+              subjects: [
+                SubjectItem(
+                  name: "ادبیات",
+                  svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
+                  progress: 0.75,
+                  iconColor: Color(0xFF7588EB),
+                ),
+                SubjectItem(
+                    name: "ادبیات",
+                    svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
+                    progress: 0.75,
+                    iconColor: Color(0xFF7588EB)),
+                SubjectItem(
+                  name: "ادبیات",
+                  svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
+                  progress: 0.75,
+                  iconColor: Color(0xFF7588EB),
+                ),
+                SubjectItem(
+                  name: "ادبیات",
+                  svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
+                  progress: 0.75,
+                  iconColor: Color(0xFF7588EB),
+                ),
+                SubjectItem(
+                  name: "ادبیات",
+                  svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
+                  progress: 0.75,
+                  iconColor: Color(0xFF7588EB),
+                ),
+              ],
             ),
           ),
         ],
       ),
     );
   }
-}
-
-class BottomProgressBar {
-  const BottomProgressBar();
 }
 
 class ChapterCard extends StatelessWidget {
