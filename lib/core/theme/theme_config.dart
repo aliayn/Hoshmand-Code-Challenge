@@ -14,7 +14,7 @@ final Color _lightErrorColor = HexColor.fromHex('#BA2A47');
 final Color _lightDividerColor = HexColor.fromHex('#C2CBD7');
 
 ThemeData get lightTheme => ThemeData(
-  fontFamily: 'YekanBakh',
+    fontFamily: 'YekanBakh',
     iconTheme: const IconThemeData(color: Colors.white),
     brightness: Brightness.light,
     // backgroundColor: _lightBG,

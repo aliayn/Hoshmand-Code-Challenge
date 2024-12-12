@@ -33,7 +33,7 @@ class HomeScreen extends BaseStateless {
               ),
             ),
           ),
-          
+
           // Bottom progress bar
           Positioned(
             bottom: 0,
@@ -106,7 +106,7 @@ class ChapterCard extends StatelessWidget {
               textDirection: TextDirection.rtl,
             ),
           ),
-          
+
           // Study Time
           Positioned(
             right: 12,

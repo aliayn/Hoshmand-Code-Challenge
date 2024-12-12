@@ -33,7 +33,8 @@ class ProgressWheel extends StatefulWidget {
   State<ProgressWheel> createState() => _ProgressWheelState();
 }
 
-class _ProgressWheelState extends State<ProgressWheel> with SingleTickerProviderStateMixin {
+class _ProgressWheelState extends State<ProgressWheel>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   double _startRotation = 0.0;
   double _endRotation = 0.0;
@@ -62,7 +63,7 @@ class _ProgressWheelState extends State<ProgressWheel> with SingleTickerProvider
         details.localPosition.dx - center.dx,
       );
       _endRotation = angle;
-      
+
       // Calculate rotation direction and animate
       final rotationDiff = _endRotation - _startRotation;
       _controller.value = rotationDiff / (2 * math.pi);
@@ -103,7 +104,7 @@ class _ProgressWheelState extends State<ProgressWheel> with SingleTickerProvider
                 color: widget.backgroundColor,
               ),
             ),
-            
+
             // Progress circle
             Transform.rotate(
               angle: _endRotation,
@@ -114,7 +115,7 @@ class _ProgressWheelState extends State<ProgressWheel> with SingleTickerProvider
                 strokeWidth: 8,
               ),
             ),
-            
+
             // Subject icon and name
             Transform.rotate(
               angle: _endRotation,

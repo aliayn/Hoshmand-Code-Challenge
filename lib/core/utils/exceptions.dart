@@ -7,8 +7,8 @@ class DataException implements Exception {
 
   String message = "";
 
-  DataException.fromDioError(DioExceptionType dioError) {
-    switch (dioError) {
+  DataException.fromDioError(DioException dioError) {
+    switch (dioError.type) {
       case DioExceptionType.cancel:
         message = LocaleKeys.errorRequestCancelled;
         break;

@@ -19,6 +19,8 @@ import 'package:hoshmand_code_challenge/data/repository/api_repository.dart'
     as _i169;
 import 'package:hoshmand_code_challenge/domain/repository/repository.dart'
     as _i538;
+import 'package:hoshmand_code_challenge/domain/use_case/get_all_units_use_case.dart'
+    as _i877;
 import 'package:hoshmand_code_challenge/presentation/home/bloc/home_bloc.dart'
     as _i556;
 import 'package:injectable/injectable.dart' as _i526;
@@ -43,6 +45,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => appModule.apiRepository(gh<_i921.ApiService>()));
     gh.lazySingleton<_i538.Repository>(
         () => _i754.RepositoryImpl(gh<_i169.ApiRepository>()));
+    gh.lazySingleton<_i877.GetAllUnitsUseCase>(
+        () => _i877.GetAllUnitsUseCase(gh<_i538.Repository>()));
     return this;
   }
 }

@@ -29,7 +29,8 @@ class LocaleKeys {
   static const recoverPasswordEmailText = 'recoverPasswordEmailText';
   static const recoverPasswordUserEmailText = 'recoverPasswordUserEmailText';
   static const recoverPasswordSendCodeText = 'recoverPasswordSendCodeText';
-  static const recoverPasswordSendCodeButtonText = 'recoverPasswordSendCodeButtonText';
+  static const recoverPasswordSendCodeButtonText =
+      'recoverPasswordSendCodeButtonText';
 
   //--------------------------- Dashboard Screen -------------------------------
   static const dashboardTitle = 'dashboardTitle';
@@ -41,8 +42,10 @@ class LocaleKeys {
   static const fieldRequiredError = 'fieldRequiredError';
   static const emailNotValidError = 'emailNotValidError';
   static const verificationCodeNotValidError = 'verificationCodeNotValidError';
-  static const passwordAndRepetitionNotEqualsError = 'passwordAndRepetitionNotEqualsError';
-  static const passwordAndRepetitionEmptyError = 'passwordAndRepetitionEmptyError';
+  static const passwordAndRepetitionNotEqualsError =
+      'passwordAndRepetitionNotEqualsError';
+  static const passwordAndRepetitionEmptyError =
+      'passwordAndRepetitionEmptyError';
   static const errorRequestCancelled = 'errorRequestCancelled';
   static const errorConnectionTimeout = 'errorConnectionTimeout';
   static const errorInternetConnection = 'errorInternetConnection';
@@ -78,7 +81,8 @@ class LocaleKeys {
   static const truckWeighbridgeSuccessfully = 'truckWeighbridgeSuccessfully';
   static const truckNoWeighbridgeError = 'truckNoWeighbridgeError';
   static const truckNoWeighbridgeFoundError = 'truckNoWeighbridgeFoundError';
-  static const truckNoDriverLicenseFoundError = 'truckNoDriverLicenseFoundError';
+  static const truckNoDriverLicenseFoundError =
+      'truckNoDriverLicenseFoundError';
 
   //------------------------------- Chat ---------------------------------------
   static const chatTitle = 'chatTitle';
@@ -88,7 +92,8 @@ class LocaleKeys {
   //------------------------------- Bottom Sheets ------------------------------
   static const chatMessageBottomSheet = 'chatTitleBottomSheet';
   static const weighbridgeBottomSheet = 'weighbridgeBottomSheet';
-  static const weighbridgeConfirmationBottomSheet = 'weighbridgeConfirmationBottomSheet';
+  static const weighbridgeConfirmationBottomSheet =
+      'weighbridgeConfirmationBottomSheet';
   static const sendWeighbridgeBottomSheet = 'sendWeighbridgeBottomSheet';
 
   //------------------------------- Product Line -------------------------------
@@ -103,7 +108,8 @@ class LocaleKeys {
   static const productLineBarcode = 'productLineBarcode';
   static const productLineBarcodeScanner = 'productLineBarcodeScanner';
   static const productLineBarcodeManually = 'productLineBarcodeManually';
-  static const productLineEnterBarcodeManually = 'productLineEnterBarcodeManually';
+  static const productLineEnterBarcodeManually =
+      'productLineEnterBarcodeManually';
   static const productLineWeight = 'productLineWeight';
   static const productLineWeightContent = 'productLineWeightContent';
   static const productLineWeightTextField = 'productLineWeightTextField';
@@ -119,7 +125,8 @@ class LocaleKeys {
   static const stocktakingDay = 'stocktakingWait';
   static const stocktakingStart = 'stocktakingStart';
   static const stocktakingStartContent = 'stocktakingStartContent';
-  static const stocktakingStartProductContent = 'stocktakingStartProductContent';
+  static const stocktakingStartProductContent =
+      'stocktakingStartProductContent';
   static const stocktakingWaitContent = 'stocktakingWaitContent';
   static const stocktakingWaitDaysContent = 'stocktakingWaitDaysContent';
   static const stocktakingWaitProductContent = 'stocktakingWaitProductContent';
@@ -128,8 +135,10 @@ class LocaleKeys {
   static const stocktakingStartDate = 'stocktakingStartDate';
   static const stocktakingStartBarcodeScan = 'stocktakingStartBarcodeScan';
   static const stocktakingFinish = 'stocktakingFinish';
-  static const finishStocktakingBottomSheetTitle = 'finishStocktakingBottomSheetTitle';
-  static const finishStocktakingBottomSheetContent = 'finishStocktakingBottomSheetContent';
+  static const finishStocktakingBottomSheetTitle =
+      'finishStocktakingBottomSheetTitle';
+  static const finishStocktakingBottomSheetContent =
+      'finishStocktakingBottomSheetContent';
 
   //------------------------------- Barcode Lable ------------------------------
   static const barcodeLable = 'barcodeLable';

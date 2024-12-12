@@ -26,4 +26,14 @@ class _ApiClientImpl implements ApiClient {
         return handler.next(error);
       },
     ));
+
+  @override
+  Future<List<Unit>> getAllUnits() async {
+    try {
+      final response = await dio.get(_Api.units);
+      return (response.data as List).map((e) => Unit.fromJson(e)).toList();
+    } on DioException catch (e) {
+      throw DataException.fromDioError(e);
+    }
+  }
 }

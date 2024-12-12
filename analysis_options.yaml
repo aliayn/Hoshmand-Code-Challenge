@@ -10,6 +10,8 @@
 analyzer:
   errors:
     depend_on_referenced_packages: ignore
+    invalid_annotation_target: ignore
+    unnecessary_library_name: ignore
 include: package:flutter_lints/flutter.yaml
 
 linter:

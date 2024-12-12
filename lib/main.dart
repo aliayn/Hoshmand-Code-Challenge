@@ -15,13 +15,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => GetMaterialApp(
-            debugShowCheckedModeBanner: false,
-            initialRoute: AppPages.initial,
-            getPages: AppPages.routes,
-            locale: const Locale('en'),
-            translationsKeys: AppTranslation.keys,
-            theme: lightTheme,
-            themeMode: ThemeMode.light,
-          );
+        debugShowCheckedModeBanner: false,
+        initialRoute: AppPages.initial,
+        getPages: AppPages.routes,
+        locale: const Locale('en'),
+        translationsKeys: AppTranslation.keys,
+        theme: lightTheme,
+        themeMode: ThemeMode.light,
+      );
 }
-

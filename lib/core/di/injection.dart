@@ -17,8 +17,7 @@ abstract class AppModule {
   ApiClient apiClient() => ApiClient();
 
   @lazySingleton
-  ApiService apiService(ApiClient apiClient) =>
-      ApiService(apiClient);
+  ApiService apiService(ApiClient apiClient) => ApiService(apiClient);
 
   @lazySingleton
   ApiRepository apiRepository(ApiService apiService) =>

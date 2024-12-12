@@ -1,4 +1,3 @@
-
 import 'package:hoshmand_code_challenge/data/provider/api/api_service.dart';
 
 class ApiRepository {

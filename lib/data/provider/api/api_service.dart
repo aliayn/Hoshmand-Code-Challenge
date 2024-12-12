@@ -4,6 +4,4 @@ class ApiService {
   final ApiClient apiClient;
 
   ApiService(this.apiClient);
-
- 
 }
