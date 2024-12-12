@@ -14,11 +14,41 @@ dependencies:
 
   cupertino_icons: ^1.0.8
 
+# state management (BLoC)
+  bloc: ^8.0.1
+  flutter_bloc: ^8.0.1
+  freezed_annotation: ^2.4.4
+
+  # dependency injection
+  injectable: ^2.5.0
+  get_it: ^8.0.1
+  logger: ^2.4.0
+
+  # UI management
+  get: ^4.6.5
+  flutter_svg: ^2.0.10+1
+  cached_network_image: ^3.3.1
+
+  # internet connection
+  dio: ^5.7.0
+  retrofit:
+  http_parser: ^4.0.2
+  json_annotation: ^4.9.0
+  dartz: ^0.10.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.13
 
-flutter:
-  uses-material-design: true
+  injectable_generator:
+
+  freezed: ^2.5.7
+  json_serializable: ^6.8.0
+  retrofit_generator:
+
+  flutter_launcher_icons: ^0.14.1
+
+  flutter_native_splash:
