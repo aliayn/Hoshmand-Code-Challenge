@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hoshmand_code_challenge/core/base/base_stateless.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends BaseStateless {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget builder(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(

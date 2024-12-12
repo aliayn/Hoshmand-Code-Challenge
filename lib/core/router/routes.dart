@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:hoshmand_code_challenge/core/base/screen_provider.dart';
 import 'package:hoshmand_code_challenge/presentation/home/bloc/home_bloc.dart';
-import 'package:hoshmand_code_challenge/screens/home_screen.dart';
+import 'package:hoshmand_code_challenge/presentation/home/widget/home_screen.dart';
 
 abstract class Routes {
   static const home = '/home';
