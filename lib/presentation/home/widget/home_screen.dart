@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hoshmand_code_challenge/const/resource.dart';
 import 'package:hoshmand_code_challenge/core/base/base_stateless.dart';
+import 'package:hoshmand_code_challenge/presentation/home/widget/crescent_clipper.dart';
 import 'package:hoshmand_code_challenge/presentation/home/widget/progress_wheel.dart';
 
 class HomeScreen extends BaseStateless {
@@ -9,69 +10,86 @@ class HomeScreen extends BaseStateless {
   @override
   Widget builder(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Stack(
+      backgroundColor: Colors.grey.shade600,
+      body: Column(
         children: [
-          // Existing content
-          SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(21.0),
-              child: Column(
-                children: [
-                  ChapterCard(
-                    chapterNumber: "فصل هشتم",
-                    studyTime: "۰۲:۳۰",
-                    isExpanded: true,
-                  ),
-                  SizedBox(height: 16),
-                  ChapterCard(
-                    chapterNumber: "فصل هفتم",
-                    studyTime: "۰۲:۳۰",
-                    isExpanded: false,
-                  ),
-                ],
+          Expanded(
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(21.0),
+                child: Column(
+                  children: [
+                    ChapterCard(
+                      chapterNumber: "فصل هشتم",
+                      studyTime: "۰۲:۳۰",
+                      isExpanded: true,
+                    ),
+                    SizedBox(height: 16),
+                    ChapterCard(
+                      chapterNumber: "فصل هفتم",
+                      studyTime: "۰۲:۳۰",
+                      isExpanded: false,
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-
-          // Bottom progress bar
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: ProgressWheel(
-              height: 150,
-              subjects: [
-                SubjectItem(
-                  name: "ادبیات",
-                  svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
-                  progress: 0.75,
-                  iconColor: Color(0xFF7588EB),
-                ),
-                SubjectItem(
+          ClipPath(
+            clipper: CrescentClipper(),
+            child: Container(
+              height: 200,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    offset: const Offset(0, -4),
+                    blurRadius: 12,
+                    spreadRadius: -2,
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.only(
+                top: 24,
+                bottom: 16,
+                left: 16,
+                right: 16,
+              ),
+              child: ProgressWheel(
+                height: 140,
+                subjects: [
+                  SubjectItem(
                     name: "ادبیات",
                     svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
                     progress: 0.75,
-                    iconColor: Color(0xFF7588EB)),
-                SubjectItem(
-                  name: "ادبیات",
-                  svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
-                  progress: 0.75,
-                  iconColor: Color(0xFF7588EB),
-                ),
-                SubjectItem(
-                  name: "ادبیات",
-                  svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
-                  progress: 0.75,
-                  iconColor: Color(0xFF7588EB),
-                ),
-                SubjectItem(
-                  name: "ادبیات",
-                  svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
-                  progress: 0.75,
-                  iconColor: Color(0xFF7588EB),
-                ),
-              ],
+                    iconColor: Color(0xFF7588EB),
+                  ),
+                  SubjectItem(
+                      name: "ادبیات",
+                      svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
+                      progress: 0.75,
+                      iconColor: Color(0xFF7588EB)),
+                  SubjectItem(
+                    name: "ادبیات",
+                    svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
+                    progress: 0.75,
+                    iconColor: Color(0xFF7588EB),
+                  ),
+                  SubjectItem(
+                    name: "ادبیات",
+                    svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
+                    progress: 0.75,
+                    iconColor: Color(0xFF7588EB),
+                  ),
+                  SubjectItem(
+                    name: "ادبیات",
+                    svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
+                    progress: 0.75,
+                    iconColor: Color(0xFF7588EB),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

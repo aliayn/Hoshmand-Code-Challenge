@@ -59,32 +59,28 @@ class _ProgressWheelState extends State<ProgressWheel> {
     
     return SizedBox(
       height: widget.height,
-      width: screenWidth * 1.5,
+      // width: screenWidth * 1.5,
       child: CustomCarousel(
-        children: widget.subjects.map((subject) => 
-          SizedBox(
-            width: screenWidth * 0.25,
-            child: _buildSubjectWidget(subject),
-          )
-        ).toList(),
         effectsBuilder: (index, scrollRatio, child) {
           final angle = (scrollRatio * math.pi) / 2;
-          final radius = screenWidth * 0.15;
+          final radius = screenWidth * 0.35;
+          
+          final y = radius * (1 - math.cos(angle)) * 0.15;
           final x = radius * math.sin(angle);
           
-          final scale = 1.0 - (scrollRatio.abs() * 0.2).clamp(0.0, 0.2);
-          final opacity = 1.0 - (scrollRatio.abs() * 0.4).clamp(0.0, 0.4);
+          final scale = 1.0 - (scrollRatio.abs() * 0.15).clamp(0.0, 0.15);
+          final opacity = 1.0 - (scrollRatio.abs() * 0.3).clamp(0.0, 0.3);
           
           return Transform(
             transform: Matrix4.identity()
               ..setEntry(3, 2, 0.001)
-              ..translate(x, 0.0)
+              ..translate(x, y)
               ..scale(scale),
             alignment: Alignment.center,
             child: Opacity(
               opacity: opacity,
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+                padding: const EdgeInsets.symmetric(horizontal: 48.0),
                 child: child,
               ),
             ),
@@ -109,91 +105,93 @@ class _ProgressWheelState extends State<ProgressWheel> {
         ),
         alignment: Alignment.center,
         depthOrder: DepthOrder.selectedInFront,
+        children: widget.subjects.map((subject) => 
+          SizedBox(
+            width: screenWidth * 0.45,
+            child: _buildSubjectWidget(subject),
+          )
+        ).toList(),
       ),
     );
   }
 
   Widget _buildSubjectWidget(SubjectItem subject) {
     final isSelected = widget.subjects.indexOf(subject) == _selectedIndex;
-    
-    return Container(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Stack(
-            alignment: Alignment.center,
-            children: [
-              SizedBox(
-                width: 48,
-                height: 48,
-                child: CircularProgressIndicator(
-                  value: subject.progress,
-                  backgroundColor: Colors.white,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    isSelected ? const Color(0xFFFFB800) : Colors.transparent,
-                  ),
-                  strokeWidth: 2,
+
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Stack(
+          alignment: Alignment.center,
+          children: [
+            SizedBox(
+              width: 64,
+              height: 64,
+              child: CircularProgressIndicator(
+                value: subject.progress,
+                backgroundColor: Colors.white,
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  isSelected ? const Color(0xFFFFB800) : Colors.transparent,
                 ),
+                strokeWidth: 2,
               ),
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.05),
-                      blurRadius: 4,
-                      offset: const Offset(0, 2),
-                    ),
-                  ],
-                ),
-                child: Center(
-                  child: SvgPicture.asset(
-                    subject.svgIcon,
-                    width: 24,
-                    height: 24,
-                    color: subject.iconColor,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text(
-            subject.name,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              color: isSelected ? Colors.black : Colors.black54,
             ),
-          ),
-          if (isSelected)
-            Padding(
-              padding: const EdgeInsets.only(top: 4),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SvgPicture.asset(
-                    'assets/icons/clock.svg',
-                    width: 14,
-                    height: 14,
-                    color: Colors.black54,
-                  ),
-                  const SizedBox(width: 4),
-                  Text(
-                    '02:30',
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.black54,
-                    ),
+            Container(
+              width: 58,
+              height: 58,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
                   ),
                 ],
               ),
+              child: Center(
+                child: SvgPicture.asset(
+                  subject.svgIcon,
+                  width: 32,
+                  height: 32,
+                ),
+              ),
             ),
-        ],
-      ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        Text(
+          subject.name,
+          style: TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            color: isSelected ? Colors.black : Colors.black54,
+          ),
+        ),
+        if (isSelected)
+          Padding(
+            padding: const EdgeInsets.only(top: 4),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.access_time,
+                  size: 14,
+                  color: Colors.black54,
+                ),
+                const SizedBox(width: 4),
+                Text(
+                  '02:30',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.black54,
+                  ),
+                ),
+              ],
+            ),
+          ),
+      ],
     );
   }
 }
