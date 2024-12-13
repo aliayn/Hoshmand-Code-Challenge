@@ -34,7 +34,7 @@ class ProgressWheel extends StatefulWidget {
 }
 
 class _ProgressWheelState extends State<ProgressWheel> {
-  late FixedExtentScrollController _controller;
+  late final FixedExtentScrollController _controller;
   int _selectedIndex = 0;
 
   @override
@@ -59,42 +59,61 @@ class _ProgressWheelState extends State<ProgressWheel> {
         final screenWidth = constraints.maxWidth;
         final itemWidth = screenWidth * 0.2;
 
-        return SizedBox(
-          height: widget.height,
-          child: RotatedBox(
-            quarterTurns: 3, // Rotate the list to make it horizontal
-            child: ListWheelScrollView.useDelegate(
-              controller: _controller,
-              itemExtent: itemWidth,
-              perspective: 0.0015, // Reduced perspective for gentler curve
-              diameterRatio: 4, // Increased for flatter curve
-              physics: const FixedExtentScrollPhysics(),
-              onSelectedItemChanged: (index) {
-                setState(() {
-                  _selectedIndex = index % widget.subjects.length;
-                });
-                widget.onTap?.call();
-              },
-              childDelegate: ListWheelChildLoopingListDelegate(
-                children: List.generate(widget.subjects.length * 1000, (index) {
-                  final realIndex = index % widget.subjects.length;
-                  final subject = widget.subjects[realIndex];
-                  final isSelected = realIndex == _selectedIndex;
-
-                  return RotatedBox(
-                    quarterTurns: 1, // Rotate items back to normal
-                    child: AnimatedOpacity(
-                      duration: const Duration(milliseconds: 200),
-                      opacity: isSelected ? 1.0 : 0.5,
-                      child: _buildSubjectWidget(subject, isSelected),
+        return RepaintBoundary(
+          child: SizedBox(
+            height: widget.height,
+            child: Transform(
+              alignment: Alignment.center,
+              transform: Matrix4.identity()
+                ..setEntry(3, 2, 0.001)
+                ..rotateX(0.5),
+              child: RotatedBox(
+                quarterTurns: 3,
+                child: ListWheelScrollView.useDelegate(
+                  controller: _controller,
+                  itemExtent: itemWidth,
+                  perspective: 0.005,
+                  diameterRatio: 2.0,
+                  physics: const FixedExtentScrollPhysics(),
+                  clipBehavior: Clip.none,
+                  renderChildrenOutsideViewport: false,
+                  onSelectedItemChanged: (index) {
+                    setState(() {
+                      _selectedIndex = index % widget.subjects.length;
+                    });
+                    widget.onTap?.call();
+                  },
+                  childDelegate: ListWheelChildLoopingListDelegate(
+                    children: List.generate(
+                      widget.subjects.length * 200, // Reduced multiplication factor
+                      (index) {
+                        final realIndex = index % widget.subjects.length;
+                        return _buildWheelItem(realIndex);
+                      },
                     ),
-                  );
-                }),
+                  ),
+                ),
               ),
             ),
           ),
         );
       },
+    );
+  }
+
+  Widget _buildWheelItem(int realIndex) {
+    final subject = widget.subjects[realIndex];
+    final isSelected = realIndex == _selectedIndex;
+
+    return RepaintBoundary(
+      child: RotatedBox(
+        quarterTurns: 1,
+        child: AnimatedOpacity(
+          duration: const Duration(milliseconds: 200),
+          opacity: isSelected ? 1.0 : 0.5,
+          child: _buildSubjectWidget(subject, isSelected),
+        ),
+      ),
     );
   }
 
