@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_custom_carousel/flutter_custom_carousel.dart';
 import 'dart:math' as math;
 
 class SubjectItem {
@@ -36,88 +35,49 @@ class ProgressWheel extends StatefulWidget {
 }
 
 class _ProgressWheelState extends State<ProgressWheel> {
-  late CustomCarouselScrollController _scrollController;
+  late PageController _pageController;
   int _selectedIndex = 0;
+  final viewportFraction = 0.3; // Adjusted for better spacing
 
   @override
   void initState() {
     super.initState();
-    _scrollController = CustomCarouselScrollController();
+    _pageController = PageController(viewportFraction: viewportFraction);
   }
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final itemCount = widget.subjects.length;
-    final visibleItems = (itemCount - 1) ~/ 2;
-    
+    final repeatedSubjects = <SubjectItem>[];
+    while (repeatedSubjects.length < 15) {
+      repeatedSubjects.addAll(widget.subjects);
+    }
+
     return SizedBox(
       height: widget.height,
-      // width: screenWidth * 1.5,
-      child: CustomCarousel(
-        effectsBuilder: (index, scrollRatio, child) {
-          final angle = (scrollRatio * math.pi) / 2;
-          final radius = screenWidth * 0.35;
-          
-          final y = radius * (1 - math.cos(angle)) * 0.15;
-          final x = radius * math.sin(angle);
-          
-          final scale = 1.0 - (scrollRatio.abs() * 0.15).clamp(0.0, 0.15);
-          final opacity = 1.0 - (scrollRatio.abs() * 0.3).clamp(0.0, 0.3);
-          
-          return Transform(
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.001)
-              ..translate(x, y)
-              ..scale(scale),
-            alignment: Alignment.center,
-            child: Opacity(
-              opacity: opacity,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 48.0),
-                child: child,
-              ),
-            ),
+      child: MyPageView(
+        children: repeatedSubjects.map((subject) {
+          final isSelected = repeatedSubjects.indexOf(subject) % widget.subjects.length == _selectedIndex;
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                _selectedIndex = repeatedSubjects.indexOf(subject) % widget.subjects.length;
+              });
+              widget.onTap?.call();
+            },
+            child: _buildSubjectWidget(subject, isSelected),
           );
-        },
-        controller: _scrollController,
-        onSelectedItemChanged: (index) {
-          setState(() {
-            _selectedIndex = index;
-          });
-          widget.onTap?.call();
-        },
-        scrollDirection: Axis.horizontal,
-        itemCountBefore: visibleItems,
-        itemCountAfter: visibleItems,
-        loop: true,
-        tapToSelect: true,
-        scrollSpeed: 1.0,
-        physics: const CustomCarouselScrollPhysics(
-          sticky: true,
-          stiffness: 0.7,
-        ),
-        alignment: Alignment.center,
-        depthOrder: DepthOrder.selectedInFront,
-        children: widget.subjects.map((subject) => 
-          SizedBox(
-            width: screenWidth * 0.45,
-            child: _buildSubjectWidget(subject),
-          )
-        ).toList(),
+        }).toList(),
       ),
     );
   }
 
-  Widget _buildSubjectWidget(SubjectItem subject) {
-    final isSelected = widget.subjects.indexOf(subject) == _selectedIndex;
-
+  Widget _buildSubjectWidget(SubjectItem subject, bool isSelected) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -169,29 +129,86 @@ class _ProgressWheelState extends State<ProgressWheel> {
             color: isSelected ? Colors.black : Colors.black54,
           ),
         ),
-        if (isSelected)
-          Padding(
-            padding: const EdgeInsets.only(top: 4),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  Icons.access_time,
-                  size: 14,
-                  color: Colors.black54,
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  '02:30',
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Colors.black54,
-                  ),
-                ),
-              ],
+      ],
+    );
+  }
+}
+
+const viewportFraction = 0.3;
+
+class MyPageView extends StatefulWidget {
+  const MyPageView({
+    required this.children,
+    Key? key,
+  }) : super(key: key);
+
+  final List<Widget> children;
+
+  factory MyPageView.images(List<ImageProvider> imageProviders) {
+    return MyPageView(
+      children: [
+        for (final image in imageProviders)
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image(
+              image: image,
+              fit: BoxFit.cover,
             ),
           ),
       ],
     );
+  }
+
+  @override
+  State<MyPageView> createState() => _MyPageViewState();
+}
+
+class _MyPageViewState extends State<MyPageView> {
+  final pageController = PageController(viewportFraction: 0.2);
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraint) {
+        final maxWidth = constraint.maxWidth;
+        return PageView.builder(
+          allowImplicitScrolling: true,
+          controller: pageController,
+          itemCount: widget.children.length,
+          itemBuilder: (_, index) {
+            final child = widget.children[index % widget.children.length];
+            return AnimatedBuilder(
+              animation: pageController,
+              builder: (_, __) {
+                final ratioX =
+                    pageController.offset / maxWidth / 0.2 - index;
+
+                final angle = math.pi * -0.03 * ratioX;
+                final scale = 1.0 - ratioX.abs() * 0.3;
+                final translateX = ratioX * 8;
+                final translateY = ratioX.abs() * 50;
+
+                return Transform.rotate(
+                  angle: angle,
+                  child: Transform.translate(
+                    offset: Offset(translateX, translateY),
+                    child: Transform.scale(
+                      scale: scale,
+                      child: child,
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+        );
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
   }
 }
