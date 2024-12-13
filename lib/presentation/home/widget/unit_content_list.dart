@@ -26,11 +26,12 @@ class UnitContentItem extends StatelessWidget {
     if (isLoading) return _loadingShimmer();
     if (error != null) return _errorState(error!);
     if (unit == null) return _emptyState();
-    return ListView.builder(
+    return ListView.separated(
       itemCount: unit!.hamdarsQUnitLearningContentDtos!.length,
       itemBuilder: (context, index) => _item(
         unit!.hamdarsQUnitLearningContentDtos![index],
       ),
+      separatorBuilder: (context, index) => const SizedBox(height: 12),
     );
   }
 
@@ -61,24 +62,6 @@ class UnitContentItem extends StatelessWidget {
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
-                    ),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          '۰۴:۴۰',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey.shade700,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Icon(
-                          Icons.access_time,
-                          size: 16,
-                          color: Colors.grey.shade700,
-                        ),
-                      ],
                     ),
                   ],
                 ),
@@ -150,7 +133,8 @@ class UnitContentItem extends StatelessWidget {
                         color: const Color(0x147588EB),
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 7),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

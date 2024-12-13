@@ -69,10 +69,10 @@ class _ProgressWheelState extends State<ProgressWheel> {
             ),
             Padding(
               padding: const EdgeInsets.only(top: 60),
-              child: RepaintBoundary(
-                child: widget.isLoading
-                    ? _buildShimmerWheel()
-                    : SizedBox(
+              child: widget.isLoading
+                  ? _buildShimmerWheel()
+                  : RepaintBoundary(
+                      child: SizedBox(
                         height: widget.height,
                         child: Transform(
                           alignment: Alignment.center,
@@ -109,7 +109,7 @@ class _ProgressWheelState extends State<ProgressWheel> {
                           ),
                         ),
                       ),
-              ),
+                    ),
             ),
           ],
         );
@@ -193,6 +193,7 @@ class _ProgressWheelState extends State<ProgressWheel> {
         const SizedBox(height: 12),
         Text(
           unit.name ?? '',
+          textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
@@ -211,65 +212,72 @@ class _ProgressWheelState extends State<ProgressWheel> {
         transform: Matrix4.identity()
           ..setEntry(3, 2, 0.001)
           ..rotateX(-0.5),
-        child: RotatedBox(
-          quarterTurns: 3,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: 5, // Number of shimmer items
-            itemBuilder: (context, index) => Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0),
-              child: RotatedBox(
-                quarterTurns: 1,
-                child: Shimmer.fromColors(
-                  baseColor: Colors.grey.shade300,
-                  highlightColor: Colors.grey.shade100,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: 5,
+          itemBuilder: (context, index) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Shimmer.fromColors(
+              baseColor: Colors.grey.shade300,
+              highlightColor: Colors.grey.shade100,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Stack(
+                    alignment: Alignment.center,
                     children: [
-                      Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          Container(
-                            width: 64,
-                            height: 64,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                color: Colors.grey.shade200,
-                                width: 2,
-                              ),
-                            ),
+                      // Outer progress indicator
+                      SizedBox(
+                        width: 64,
+                        height: 64,
+                        child: CircularProgressIndicator(
+                          value: 0,
+                          backgroundColor: Colors.white,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            Colors.grey.shade200,
                           ),
-                          Container(
-                            width: 58,
-                            height: 58,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.05),
-                                  blurRadius: 4,
-                                  offset: const Offset(0, 2),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                          strokeWidth: 2,
+                        ),
                       ),
-                      const SizedBox(height: 12),
+                      // Inner circle with icon
                       Container(
-                        width: 60,
-                        height: 14,
+                        width: 58,
+                        height: 58,
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(7),
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              blurRadius: 4,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Center(
+                          child: Container(
+                            width: 32,
+                            height: 32,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade200,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
                         ),
                       ),
                     ],
                   ),
-                ),
+                  const SizedBox(height: 12),
+                  // Text placeholder
+                  Container(
+                    width: 60,
+                    height: 14,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(7),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),

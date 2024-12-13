@@ -28,6 +28,8 @@ dependencies:
   get: ^4.6.5
   flutter_svg: ^2.0.10+1
   shimmer: ^3.0.0
+  flutter_custom_clippers: ^2.1.0
+  persian_fonts: ^1.0.6
 
   # internet connection
   dio: ^5.7.0
@@ -35,7 +37,7 @@ dependencies:
   http_parser: ^4.0.2
   json_annotation: ^4.9.0
   dartz: ^0.10.1
-  flutter_custom_clippers: ^2.1.0
+
   
 
 dev_dependencies:
