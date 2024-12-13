@@ -25,7 +25,9 @@ class UnitContentItem extends StatelessWidget {
   Widget build(BuildContext context) {
     if (isLoading) return _loadingShimmer();
     if (error != null) return _errorState(error!);
-    if (unit == null) return _emptyState();
+    if (unit == null || (unit?.hamdarsQUnitLearningContentDtos?.isEmpty ?? true)) {
+      return _emptyState();
+    }
     return ListView.separated(
       itemCount: unit!.hamdarsQUnitLearningContentDtos!.length,
       itemBuilder: (context, index) => _item(

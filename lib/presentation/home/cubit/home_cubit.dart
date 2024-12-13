@@ -20,7 +20,11 @@ class HomeCubit extends Cubit<HomeState> {
     emit(HomeState.loading());
     final result = await _getAllUnitsUseCase.call(NoParams());
     result.fold((l) => emit(HomeState.error(l.error)),
-        (r) => emit(HomeState.unitList(r)));
+        (r) {
+          int selectedUnit = r.length ~/ 2;
+          emit(HomeState.unitList(r));
+          emit(HomeState.setUnitContent(r[selectedUnit]));
+        });
   }
 
   void setUnitContent(UnitModel unit) {

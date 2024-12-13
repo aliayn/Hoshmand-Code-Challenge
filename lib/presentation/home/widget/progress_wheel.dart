@@ -29,10 +29,17 @@ class _ProgressWheelState extends State<ProgressWheel> {
   @override
   void initState() {
     super.initState();
-    _controller = FixedExtentScrollController(
-      initialItem: widget.units.length * 100 + (widget.units.length ~/ 2),
-    );
     _selectedIndex = widget.units.length ~/ 2;
+    _controller = FixedExtentScrollController(
+      initialItem: widget.units.length * 100 + _selectedIndex,
+    );
+
+    // Call onSelect with the initial item
+    if (widget.units.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        widget.onSelect(widget.units[_selectedIndex]);
+      });
+    }
   }
 
   @override
