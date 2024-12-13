@@ -38,6 +38,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  bdd_framework:
+    dependency: "direct main"
+    description:
+      name: bdd_framework
+      sha256: "135d0c1292a7a675bbb22b465ed142834b84555e09b556d0752f29efda68b0ed"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0"
+  bdd_widget_test:
+    dependency: "direct main"
+    description:
+      name: bdd_widget_test
+      sha256: "7cecee3535f80242c5b2c37a08bc7b5113f8e6369d5f436a166c2aa417d70bf9"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.7.4"
   bloc:
     dependency: "direct main"
     description:
@@ -198,6 +214,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.10.1"
+  diacritic:
+    dependency: transitive
+    description:
+      name: diacritic
+      sha256: "12981945ec38931748836cd76f2b38773118d0baef3c68404bdfde9566147876"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.6"
   dio:
     dependency: "direct main"
     description:

@@ -38,7 +38,9 @@ dependencies:
   json_annotation: ^4.9.0
   dartz: ^0.10.1
 
-  
+  # BDD
+  bdd_framework: ^4.0.0
+  bdd_widget_test: ^1.7.4
 
 dev_dependencies:
   flutter_test:

@@ -22,7 +22,7 @@ mixin _$HomeState {
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function(List<UnitModel> units) unitList,
-    required TResult Function(UnitModel unitList) setUnitContent,
+    required TResult Function(UnitModel unit) setUnitContent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,7 +31,7 @@ mixin _$HomeState {
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function(List<UnitModel> units)? unitList,
-    TResult? Function(UnitModel unitList)? setUnitContent,
+    TResult? Function(UnitModel unit)? setUnitContent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,7 +40,7 @@ mixin _$HomeState {
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function(List<UnitModel> units)? unitList,
-    TResult Function(UnitModel unitList)? setUnitContent,
+    TResult Function(UnitModel unit)? setUnitContent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -139,7 +139,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function(List<UnitModel> units) unitList,
-    required TResult Function(UnitModel unitList) setUnitContent,
+    required TResult Function(UnitModel unit) setUnitContent,
   }) {
     return initial();
   }
@@ -151,7 +151,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function(List<UnitModel> units)? unitList,
-    TResult? Function(UnitModel unitList)? setUnitContent,
+    TResult? Function(UnitModel unit)? setUnitContent,
   }) {
     return initial?.call();
   }
@@ -163,7 +163,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function(List<UnitModel> units)? unitList,
-    TResult Function(UnitModel unitList)? setUnitContent,
+    TResult Function(UnitModel unit)? setUnitContent,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -262,7 +262,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function(List<UnitModel> units) unitList,
-    required TResult Function(UnitModel unitList) setUnitContent,
+    required TResult Function(UnitModel unit) setUnitContent,
   }) {
     return loading();
   }
@@ -274,7 +274,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function(List<UnitModel> units)? unitList,
-    TResult? Function(UnitModel unitList)? setUnitContent,
+    TResult? Function(UnitModel unit)? setUnitContent,
   }) {
     return loading?.call();
   }
@@ -286,7 +286,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function(List<UnitModel> units)? unitList,
-    TResult Function(UnitModel unitList)? setUnitContent,
+    TResult Function(UnitModel unit)? setUnitContent,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -412,7 +412,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function(List<UnitModel> units) unitList,
-    required TResult Function(UnitModel unitList) setUnitContent,
+    required TResult Function(UnitModel unit) setUnitContent,
   }) {
     return error(message);
   }
@@ -424,7 +424,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function(List<UnitModel> units)? unitList,
-    TResult? Function(UnitModel unitList)? setUnitContent,
+    TResult? Function(UnitModel unit)? setUnitContent,
   }) {
     return error?.call(message);
   }
@@ -436,7 +436,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function(List<UnitModel> units)? unitList,
-    TResult Function(UnitModel unitList)? setUnitContent,
+    TResult Function(UnitModel unit)? setUnitContent,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -576,7 +576,7 @@ class _$UnitListImpl implements _UnitList {
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function(List<UnitModel> units) unitList,
-    required TResult Function(UnitModel unitList) setUnitContent,
+    required TResult Function(UnitModel unit) setUnitContent,
   }) {
     return unitList(units);
   }
@@ -588,7 +588,7 @@ class _$UnitListImpl implements _UnitList {
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function(List<UnitModel> units)? unitList,
-    TResult? Function(UnitModel unitList)? setUnitContent,
+    TResult? Function(UnitModel unit)? setUnitContent,
   }) {
     return unitList?.call(units);
   }
@@ -600,7 +600,7 @@ class _$UnitListImpl implements _UnitList {
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function(List<UnitModel> units)? unitList,
-    TResult Function(UnitModel unitList)? setUnitContent,
+    TResult Function(UnitModel unit)? setUnitContent,
     required TResult orElse(),
   }) {
     if (unitList != null) {
@@ -668,9 +668,9 @@ abstract class _$$SetUnitContentImplCopyWith<$Res> {
           $Res Function(_$SetUnitContentImpl) then) =
       __$$SetUnitContentImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({UnitModel unitList});
+  $Res call({UnitModel unit});
 
-  $UnitModelCopyWith<$Res> get unitList;
+  $UnitModelCopyWith<$Res> get unit;
 }
 
 /// @nodoc
@@ -686,12 +686,12 @@ class __$$SetUnitContentImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? unitList = null,
+    Object? unit = null,
   }) {
     return _then(_$SetUnitContentImpl(
-      null == unitList
-          ? _value.unitList
-          : unitList // ignore: cast_nullable_to_non_nullable
+      null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
               as UnitModel,
     ));
   }
@@ -700,9 +700,9 @@ class __$$SetUnitContentImplCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
-  $UnitModelCopyWith<$Res> get unitList {
-    return $UnitModelCopyWith<$Res>(_value.unitList, (value) {
-      return _then(_value.copyWith(unitList: value));
+  $UnitModelCopyWith<$Res> get unit {
+    return $UnitModelCopyWith<$Res>(_value.unit, (value) {
+      return _then(_value.copyWith(unit: value));
     });
   }
 }
@@ -710,14 +710,14 @@ class __$$SetUnitContentImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SetUnitContentImpl implements _SetUnitContent {
-  const _$SetUnitContentImpl(this.unitList);
+  const _$SetUnitContentImpl(this.unit);
 
   @override
-  final UnitModel unitList;
+  final UnitModel unit;
 
   @override
   String toString() {
-    return 'HomeState.setUnitContent(unitList: $unitList)';
+    return 'HomeState.setUnitContent(unit: $unit)';
   }
 
   @override
@@ -725,12 +725,11 @@ class _$SetUnitContentImpl implements _SetUnitContent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$SetUnitContentImpl &&
-            (identical(other.unitList, unitList) ||
-                other.unitList == unitList));
+            (identical(other.unit, unit) || other.unit == unit));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, unitList);
+  int get hashCode => Object.hash(runtimeType, unit);
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
@@ -748,9 +747,9 @@ class _$SetUnitContentImpl implements _SetUnitContent {
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function(List<UnitModel> units) unitList,
-    required TResult Function(UnitModel unitList) setUnitContent,
+    required TResult Function(UnitModel unit) setUnitContent,
   }) {
-    return setUnitContent(this.unitList);
+    return setUnitContent(unit);
   }
 
   @override
@@ -760,9 +759,9 @@ class _$SetUnitContentImpl implements _SetUnitContent {
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function(List<UnitModel> units)? unitList,
-    TResult? Function(UnitModel unitList)? setUnitContent,
+    TResult? Function(UnitModel unit)? setUnitContent,
   }) {
-    return setUnitContent?.call(this.unitList);
+    return setUnitContent?.call(unit);
   }
 
   @override
@@ -772,11 +771,11 @@ class _$SetUnitContentImpl implements _SetUnitContent {
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function(List<UnitModel> units)? unitList,
-    TResult Function(UnitModel unitList)? setUnitContent,
+    TResult Function(UnitModel unit)? setUnitContent,
     required TResult orElse(),
   }) {
     if (setUnitContent != null) {
-      return setUnitContent(this.unitList);
+      return setUnitContent(unit);
     }
     return orElse();
   }
@@ -823,10 +822,9 @@ class _$SetUnitContentImpl implements _SetUnitContent {
 }
 
 abstract class _SetUnitContent implements HomeState {
-  const factory _SetUnitContent(final UnitModel unitList) =
-      _$SetUnitContentImpl;
+  const factory _SetUnitContent(final UnitModel unit) = _$SetUnitContentImpl;
 
-  UnitModel get unitList;
+  UnitModel get unit;
 
   /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
