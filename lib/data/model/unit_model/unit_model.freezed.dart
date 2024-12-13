@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'unit.dart';
+part of 'unit_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-Unit _$UnitFromJson(Map<String, dynamic> json) {
-  return _Unit.fromJson(json);
+UnitModel _$UnitModelFromJson(Map<String, dynamic> json) {
+  return _UnitModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$Unit {
+mixin _$UnitModel {
   String? get id => throw _privateConstructorUsedError;
   String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'unit_icon')
@@ -34,19 +34,20 @@ mixin _$Unit {
   List<HamdarsQUnitLearningContentDto>? get hamdarsQUnitLearningContentDtos =>
       throw _privateConstructorUsedError;
 
-  /// Serializes this Unit to a JSON map.
+  /// Serializes this UnitModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
 
-  /// Create a copy of Unit
+  /// Create a copy of UnitModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $UnitCopyWith<Unit> get copyWith => throw _privateConstructorUsedError;
+  $UnitModelCopyWith<UnitModel> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $UnitCopyWith<$Res> {
-  factory $UnitCopyWith(Unit value, $Res Function(Unit) then) =
-      _$UnitCopyWithImpl<$Res, Unit>;
+abstract class $UnitModelCopyWith<$Res> {
+  factory $UnitModelCopyWith(UnitModel value, $Res Function(UnitModel) then) =
+      _$UnitModelCopyWithImpl<$Res, UnitModel>;
   @useResult
   $Res call(
       {String? id,
@@ -61,16 +62,16 @@ abstract class $UnitCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$UnitCopyWithImpl<$Res, $Val extends Unit>
-    implements $UnitCopyWith<$Res> {
-  _$UnitCopyWithImpl(this._value, this._then);
+class _$UnitModelCopyWithImpl<$Res, $Val extends UnitModel>
+    implements $UnitModelCopyWith<$Res> {
+  _$UnitModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Unit
+  /// Create a copy of UnitModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -129,10 +130,11 @@ class _$UnitCopyWithImpl<$Res, $Val extends Unit>
 }
 
 /// @nodoc
-abstract class _$$UnitImplCopyWith<$Res> implements $UnitCopyWith<$Res> {
-  factory _$$UnitImplCopyWith(
-          _$UnitImpl value, $Res Function(_$UnitImpl) then) =
-      __$$UnitImplCopyWithImpl<$Res>;
+abstract class _$$UnitModelImplCopyWith<$Res>
+    implements $UnitModelCopyWith<$Res> {
+  factory _$$UnitModelImplCopyWith(
+          _$UnitModelImpl value, $Res Function(_$UnitModelImpl) then) =
+      __$$UnitModelImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -148,13 +150,14 @@ abstract class _$$UnitImplCopyWith<$Res> implements $UnitCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$UnitImplCopyWithImpl<$Res>
-    extends _$UnitCopyWithImpl<$Res, _$UnitImpl>
-    implements _$$UnitImplCopyWith<$Res> {
-  __$$UnitImplCopyWithImpl(_$UnitImpl _value, $Res Function(_$UnitImpl) _then)
+class __$$UnitModelImplCopyWithImpl<$Res>
+    extends _$UnitModelCopyWithImpl<$Res, _$UnitModelImpl>
+    implements _$$UnitModelImplCopyWith<$Res> {
+  __$$UnitModelImplCopyWithImpl(
+      _$UnitModelImpl _value, $Res Function(_$UnitModelImpl) _then)
       : super(_value, _then);
 
-  /// Create a copy of Unit
+  /// Create a copy of UnitModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -169,7 +172,7 @@ class __$$UnitImplCopyWithImpl<$Res>
     Object? hamdarsUserMinUnitLevelPoint = freezed,
     Object? hamdarsQUnitLearningContentDtos = freezed,
   }) {
-    return _then(_$UnitImpl(
+    return _then(_$UnitModelImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -214,8 +217,8 @@ class __$$UnitImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$UnitImpl implements _Unit {
-  _$UnitImpl(
+class _$UnitModelImpl implements _UnitModel {
+  _$UnitModelImpl(
       {this.id,
       this.name,
       @JsonKey(name: 'unit_icon') this.unitIcon,
@@ -228,8 +231,8 @@ class _$UnitImpl implements _Unit {
           hamdarsQUnitLearningContentDtos})
       : _hamdarsQUnitLearningContentDtos = hamdarsQUnitLearningContentDtos;
 
-  factory _$UnitImpl.fromJson(Map<String, dynamic> json) =>
-      _$$UnitImplFromJson(json);
+  factory _$UnitModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$UnitModelImplFromJson(json);
 
   @override
   final String? id;
@@ -262,14 +265,14 @@ class _$UnitImpl implements _Unit {
 
   @override
   String toString() {
-    return 'Unit(id: $id, name: $name, unitIcon: $unitIcon, sumUserStudy: $sumUserStudy, hamdarsUserUnitLevelIndex: $hamdarsUserUnitLevelIndex, hamdarsUserCurrentUnitLevelPoint: $hamdarsUserCurrentUnitLevelPoint, hamdarsUserMaxUnitLevelPoint: $hamdarsUserMaxUnitLevelPoint, hamdarsUserMinUnitLevelPoint: $hamdarsUserMinUnitLevelPoint, hamdarsQUnitLearningContentDtos: $hamdarsQUnitLearningContentDtos)';
+    return 'UnitModel(id: $id, name: $name, unitIcon: $unitIcon, sumUserStudy: $sumUserStudy, hamdarsUserUnitLevelIndex: $hamdarsUserUnitLevelIndex, hamdarsUserCurrentUnitLevelPoint: $hamdarsUserCurrentUnitLevelPoint, hamdarsUserMaxUnitLevelPoint: $hamdarsUserMaxUnitLevelPoint, hamdarsUserMinUnitLevelPoint: $hamdarsUserMinUnitLevelPoint, hamdarsQUnitLearningContentDtos: $hamdarsQUnitLearningContentDtos)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$UnitImpl &&
+            other is _$UnitModelImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.unitIcon, unitIcon) ||
@@ -310,24 +313,24 @@ class _$UnitImpl implements _Unit {
       hamdarsUserMinUnitLevelPoint,
       const DeepCollectionEquality().hash(_hamdarsQUnitLearningContentDtos));
 
-  /// Create a copy of Unit
+  /// Create a copy of UnitModel
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$UnitImplCopyWith<_$UnitImpl> get copyWith =>
-      __$$UnitImplCopyWithImpl<_$UnitImpl>(this, _$identity);
+  _$$UnitModelImplCopyWith<_$UnitModelImpl> get copyWith =>
+      __$$UnitModelImplCopyWithImpl<_$UnitModelImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UnitImplToJson(
+    return _$$UnitModelImplToJson(
       this,
     );
   }
 }
 
-abstract class _Unit implements Unit {
-  factory _Unit(
+abstract class _UnitModel implements UnitModel {
+  factory _UnitModel(
       {final String? id,
       final String? name,
       @JsonKey(name: 'unit_icon') final String? unitIcon,
@@ -337,9 +340,10 @@ abstract class _Unit implements Unit {
       final int? hamdarsUserMaxUnitLevelPoint,
       final int? hamdarsUserMinUnitLevelPoint,
       final List<HamdarsQUnitLearningContentDto>?
-          hamdarsQUnitLearningContentDtos}) = _$UnitImpl;
+          hamdarsQUnitLearningContentDtos}) = _$UnitModelImpl;
 
-  factory _Unit.fromJson(Map<String, dynamic> json) = _$UnitImpl.fromJson;
+  factory _UnitModel.fromJson(Map<String, dynamic> json) =
+      _$UnitModelImpl.fromJson;
 
   @override
   String? get id;
@@ -362,10 +366,10 @@ abstract class _Unit implements Unit {
   @override
   List<HamdarsQUnitLearningContentDto>? get hamdarsQUnitLearningContentDtos;
 
-  /// Create a copy of Unit
+  /// Create a copy of UnitModel
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$UnitImplCopyWith<_$UnitImpl> get copyWith =>
+  _$$UnitModelImplCopyWith<_$UnitModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

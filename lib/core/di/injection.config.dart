@@ -37,7 +37,6 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     final appModule = _$AppModule();
-    gh.factory<_i556.HomeBloc>(() => _i556.HomeBloc());
     gh.lazySingleton<_i43.ApiClient>(() => appModule.apiClient());
     gh.lazySingleton<_i921.ApiService>(
         () => appModule.apiService(gh<_i43.ApiClient>()));
@@ -47,6 +46,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i754.RepositoryImpl(gh<_i169.ApiRepository>()));
     gh.lazySingleton<_i877.GetAllUnitsUseCase>(
         () => _i877.GetAllUnitsUseCase(gh<_i538.Repository>()));
+    gh.factory<_i556.HomeBloc>(
+        () => _i556.HomeBloc(gh<_i877.GetAllUnitsUseCase>()));
     return this;
   }
 }

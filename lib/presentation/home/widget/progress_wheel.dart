@@ -85,7 +85,8 @@ class _ProgressWheelState extends State<ProgressWheel> {
                   },
                   childDelegate: ListWheelChildLoopingListDelegate(
                     children: List.generate(
-                      widget.subjects.length * 200, // Reduced multiplication factor
+                      widget.subjects.length *
+                          200, // Reduced multiplication factor
                       (index) {
                         final realIndex = index % widget.subjects.length;
                         return _buildWheelItem(realIndex);

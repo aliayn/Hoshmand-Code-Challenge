@@ -1,4 +1,7 @@
 part of 'home_bloc.dart';
 
-@immutable
-sealed class HomeEvent {}
+@freezed
+class HomeEvent with _$HomeEvent {
+  const factory HomeEvent.started() = _Started;
+  const factory HomeEvent.retry() = _Retry;
+}

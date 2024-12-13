@@ -28,10 +28,10 @@ class _ApiClientImpl implements ApiClient {
     ));
 
   @override
-  Future<List<Unit>> getAllUnits() async {
+  Future<List<UnitModel>> getAllUnits() async {
     try {
       final response = await dio.get(_Api.units);
-      return (response.data as List).map((e) => Unit.fromJson(e)).toList();
+      return (response.data as List).map((e) => UnitModel.fromJson(e)).toList();
     } on DioException catch (e) {
       throw DataException.fromDioError(e);
     }

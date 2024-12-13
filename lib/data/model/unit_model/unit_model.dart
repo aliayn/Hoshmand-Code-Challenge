@@ -2,12 +2,12 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'hamdars_q_unit_learning_content_dto.dart';
 
-part 'unit.freezed.dart';
-part 'unit.g.dart';
+part 'unit_model.freezed.dart';
+part 'unit_model.g.dart';
 
 @freezed
-class Unit with _$Unit {
-  factory Unit({
+class UnitModel with _$UnitModel {
+  factory UnitModel({
     String? id,
     String? name,
     @JsonKey(name: 'unit_icon') String? unitIcon,
@@ -17,7 +17,8 @@ class Unit with _$Unit {
     int? hamdarsUserMaxUnitLevelPoint,
     int? hamdarsUserMinUnitLevelPoint,
     List<HamdarsQUnitLearningContentDto>? hamdarsQUnitLearningContentDtos,
-  }) = _Unit;
+  }) = _UnitModel;
 
-  factory Unit.fromJson(Map<String, dynamic> json) => _$UnitFromJson(json);
+  factory UnitModel.fromJson(Map<String, dynamic> json) =>
+      _$UnitModelFromJson(json);
 }

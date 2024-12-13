@@ -1,12 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'unit.dart';
+part of 'unit_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$UnitImpl _$$UnitImplFromJson(Map<String, dynamic> json) => _$UnitImpl(
+_$UnitModelImpl _$$UnitModelImplFromJson(Map<String, dynamic> json) =>
+    _$UnitModelImpl(
       id: json['id'] as String?,
       name: json['name'] as String?,
       unitIcon: json['unit_icon'] as String?,
@@ -26,7 +27,7 @@ _$UnitImpl _$$UnitImplFromJson(Map<String, dynamic> json) => _$UnitImpl(
               .toList(),
     );
 
-Map<String, dynamic> _$$UnitImplToJson(_$UnitImpl instance) =>
+Map<String, dynamic> _$$UnitModelImplToJson(_$UnitModelImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
