@@ -1,32 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-class SubjectItem {
-  final String name;
-  final String svgIcon;
-  final double progress;
-  final Color iconColor;
-  final bool isSelected;
-
-  SubjectItem({
-    required this.name,
-    required this.svgIcon,
-    required this.progress,
-    required this.iconColor,
-    this.isSelected = false,
-  });
-}
+import 'package:hoshmand_code_challenge/data/model/unit_model/unit_model.dart';
 
 class ProgressWheel extends StatefulWidget {
-  final List<SubjectItem> subjects;
+  final List<UnitModel> units;
   final double height;
-  final VoidCallback? onTap;
+  final bool isLoading;
+  final Function(UnitModel) onSelect;
 
   const ProgressWheel({
     super.key,
-    required this.subjects,
+    required this.units,
     this.height = 100,
-    this.onTap,
+    required this.onSelect,
+    this.isLoading = false,
   });
 
   @override
@@ -41,9 +28,9 @@ class _ProgressWheelState extends State<ProgressWheel> {
   void initState() {
     super.initState();
     _controller = FixedExtentScrollController(
-      initialItem: widget.subjects.length * 100 + (widget.subjects.length ~/ 2),
+      initialItem: widget.units.length * 100 + (widget.units.length ~/ 2),
     );
-    _selectedIndex = widget.subjects.length ~/ 2;
+    _selectedIndex = widget.units.length ~/ 2;
   }
 
   @override
@@ -66,7 +53,7 @@ class _ProgressWheelState extends State<ProgressWheel> {
               alignment: Alignment.center,
               transform: Matrix4.identity()
                 ..setEntry(3, 2, 0.001)
-                ..rotateX(0.5),
+                ..rotateX(-0.5),
               child: RotatedBox(
                 quarterTurns: 3,
                 child: ListWheelScrollView.useDelegate(
@@ -79,16 +66,15 @@ class _ProgressWheelState extends State<ProgressWheel> {
                   renderChildrenOutsideViewport: false,
                   onSelectedItemChanged: (index) {
                     setState(() {
-                      _selectedIndex = index % widget.subjects.length;
+                      _selectedIndex = index % widget.units.length;
                     });
-                    widget.onTap?.call();
+                    widget.onSelect(widget.units[_selectedIndex]);
                   },
                   childDelegate: ListWheelChildLoopingListDelegate(
                     children: List.generate(
-                      widget.subjects.length *
-                          200, // Reduced multiplication factor
+                      widget.units.length * 200,
                       (index) {
-                        final realIndex = index % widget.subjects.length;
+                        final realIndex = index % widget.units.length;
                         return _buildWheelItem(realIndex);
                       },
                     ),
@@ -103,7 +89,7 @@ class _ProgressWheelState extends State<ProgressWheel> {
   }
 
   Widget _buildWheelItem(int realIndex) {
-    final subject = widget.subjects[realIndex];
+    final unit = widget.units[realIndex];
     final isSelected = realIndex == _selectedIndex;
 
     return RepaintBoundary(
@@ -112,13 +98,21 @@ class _ProgressWheelState extends State<ProgressWheel> {
         child: AnimatedOpacity(
           duration: const Duration(milliseconds: 200),
           opacity: isSelected ? 1.0 : 0.5,
-          child: _buildSubjectWidget(subject, isSelected),
+          child: _buildUnitWidget(unit, isSelected),
         ),
       ),
     );
   }
 
-  Widget _buildSubjectWidget(SubjectItem subject, bool isSelected) {
+  Widget _buildUnitWidget(UnitModel unit, bool isSelected) {
+    // Calculate progress based on points
+    final progress = unit.hamdarsUserCurrentUnitLevelPoint != null &&
+            unit.hamdarsUserMaxUnitLevelPoint != null &&
+            unit.hamdarsUserMaxUnitLevelPoint! > 0
+        ? unit.hamdarsUserCurrentUnitLevelPoint! /
+            unit.hamdarsUserMaxUnitLevelPoint!
+        : 0.0;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -129,7 +123,7 @@ class _ProgressWheelState extends State<ProgressWheel> {
               width: 64,
               height: 64,
               child: CircularProgressIndicator(
-                value: subject.progress,
+                value: progress,
                 backgroundColor: Colors.white,
                 valueColor: AlwaysStoppedAnimation<Color>(
                   isSelected ? const Color(0xFFFFB800) : Colors.transparent,
@@ -152,18 +146,24 @@ class _ProgressWheelState extends State<ProgressWheel> {
                 ],
               ),
               child: Center(
-                child: SvgPicture.asset(
-                  subject.svgIcon,
-                  width: 32,
-                  height: 32,
-                ),
+                child: unit.unitIcon != null
+                    ? SvgPicture.network(
+                        unit.unitIcon!,
+                        width: 32,
+                        height: 32,
+                      )
+                    : const Icon(
+                        Icons.book,
+                        size: 32,
+                        color: Color(0xFF404040),
+                      ),
               ),
             ),
           ],
         ),
         const SizedBox(height: 12),
         Text(
-          subject.name,
+          unit.name ?? '',
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,

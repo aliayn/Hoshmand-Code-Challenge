@@ -1,226 +1,75 @@
 import 'package:flutter/material.dart';
-import 'package:hoshmand_code_challenge/const/resource.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hoshmand_code_challenge/core/base/base_stateless.dart';
-import 'package:hoshmand_code_challenge/presentation/home/widget/crescent_clipper.dart';
+import 'package:hoshmand_code_challenge/presentation/home/cubit/home_cubit.dart';
 import 'package:hoshmand_code_challenge/presentation/home/widget/progress_wheel.dart';
+import 'package:hoshmand_code_challenge/presentation/home/widget/unit_content_list.dart';
 
 class HomeScreen extends BaseStateless {
   const HomeScreen({super.key});
 
   @override
-  Widget builder(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey.shade600,
-      body: Column(
-        children: [
-          Expanded(
-            child: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(21.0),
-                child: Column(
-                  children: [
-                    ChapterCard(
-                      chapterNumber: "فصل هشتم",
-                      studyTime: "۰۲:۳۰",
-                      isExpanded: true,
-                    ),
-                    SizedBox(height: 16),
-                    ChapterCard(
-                      chapterNumber: "فصل هفتم",
-                      studyTime: "۰۲:۳۰",
-                      isExpanded: false,
-                    ),
-                  ],
-                ),
+  Widget builder(BuildContext context) => Scaffold(
+        backgroundColor: Colors.grey.shade300,
+        body: SafeArea(
+          child: Column(
+            children: [
+              _unitContentList(),
+              _unitWheelList(),
+            ],
+          ),
+        ),
+      );
+
+  Widget _unitWheelList() => BlocBuilder<HomeCubit, HomeState>(
+        buildWhen: (previous, current) =>
+            current.whenOrNull(
+              loading: () => true,
+              unitList: (units) => true,
+            ) ??
+            false,
+        builder: (context, state) {
+          final isLoading = state.whenOrNull(loading: () => true) ?? false;
+          final units = state.whenOrNull(unitList: (units) => units);
+          return ProgressWheel(
+            height: 140,
+            units: units ?? [],
+            isLoading: isLoading,
+            onSelect: (unit) {
+              context.read<HomeCubit>().setUnitContent(unit);
+            },
+          );
+        },
+      );
+
+  Widget _unitContentList() => BlocBuilder<HomeCubit, HomeState>(
+        buildWhen: (previous, current) =>
+            current.whenOrNull(
+                loading: () => true,
+                setUnitContent: (unit) => true,
+                error: (error) => true) ??
+            false,
+        builder: (context, state) {
+          final unit = state.whenOrNull(setUnitContent: (unit) => unit);
+          final isLoading = state.whenOrNull(loading: () => true) ?? false;
+          final error = state.whenOrNull(error: (error) => error);
+
+          return Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(21.0),
+              child: UnitContentItem(
+                isLoading: isLoading,
+                unit: unit,
+                error: error,
+                onTap: () {
+                  // Handle tap
+                },
+                onRetry: () {
+                  context.read<HomeCubit>().getAllUnits();
+                },
               ),
             ),
-          ),
-          ClipPath(
-            clipper: CrescentClipper(),
-            child: Container(
-              height: 200,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    offset: const Offset(0, -4),
-                    blurRadius: 12,
-                    spreadRadius: -2,
-                  ),
-                ],
-              ),
-              padding: EdgeInsets.only(
-                top: 24,
-                bottom: 16,
-                left: 16,
-                right: 16,
-              ),
-              child: ProgressWheel(
-                height: 140,
-                subjects: [
-                  SubjectItem(
-                    name: "ادبیات",
-                    svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
-                    progress: 0.75,
-                    iconColor: Color(0xFF7588EB),
-                  ),
-                  SubjectItem(
-                      name: "ادبیات",
-                      svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
-                      progress: 0.75,
-                      iconColor: Color(0xFF7588EB)),
-                  SubjectItem(
-                    name: "ادبیات",
-                    svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
-                    progress: 0.75,
-                    iconColor: Color(0xFF7588EB),
-                  ),
-                  SubjectItem(
-                    name: "ادبیات",
-                    svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
-                    progress: 0.75,
-                    iconColor: Color(0xFF7588EB),
-                  ),
-                  SubjectItem(
-                    name: "ادبیات",
-                    svgIcon: R.ASSETS_ICONS_LITERATURE_SVG,
-                    progress: 0.75,
-                    iconColor: Color(0xFF7588EB),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ChapterCard extends StatelessWidget {
-  final String chapterNumber;
-  final String studyTime;
-  final bool isExpanded;
-
-  const ChapterCard({
-    super.key,
-    required this.chapterNumber,
-    required this.studyTime,
-    this.isExpanded = false,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 312,
-      height: 64,
-      decoration: BoxDecoration(
-        color: const Color(0x147588EB),
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.15),
-            offset: const Offset(0, 2),
-            blurRadius: 6,
-            spreadRadius: 2,
-          ),
-          BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            offset: const Offset(0, 1),
-            blurRadius: 2,
-          ),
-        ],
-      ),
-      child: Stack(
-        children: [
-          // Chapter Title
-          Positioned(
-            right: 12,
-            top: 7,
-            child: Text(
-              chapterNumber,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-              textDirection: TextDirection.rtl,
-            ),
-          ),
-
-          // Study Time
-          Positioned(
-            right: 12,
-            bottom: 7,
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.access_time,
-                  size: 16,
-                  color: Color(0xFF404040),
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  studyTime,
-                  style: const TextStyle(
-                    color: Color(0xFF404040),
-                    fontSize: 14,
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          // Expand Icon
-          Positioned(
-            left: 12,
-            bottom: 20,
-            child: Transform.rotate(
-              angle: isExpanded ? 3.14159 : 0,
-              child: const Icon(
-                Icons.expand_more,
-                color: Color(0xFF404040),
-              ),
-            ),
-          ),
-
-          // Chapter Icon
-          Positioned(
-            right: 248,
-            top: 0,
-            child: Container(
-              width: 64,
-              height: 64,
-              decoration: const BoxDecoration(
-                color: Color(0xFFEDEDED),
-                shape: BoxShape.circle,
-              ),
-              child: Center(
-                child: Container(
-                  width: 48,
-                  height: 48,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.15),
-                        offset: const Offset(0, 1),
-                        blurRadius: 8,
-                      ),
-                    ],
-                  ),
-                  child: const Icon(
-                    Icons.book,
-                    color: Color(0xFF404040),
-                    size: 24,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+          );
+        },
+      );
 }

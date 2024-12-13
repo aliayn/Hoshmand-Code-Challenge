@@ -21,8 +21,8 @@ import 'package:hoshmand_code_challenge/domain/repository/repository.dart'
     as _i538;
 import 'package:hoshmand_code_challenge/domain/use_case/get_all_units_use_case.dart'
     as _i877;
-import 'package:hoshmand_code_challenge/presentation/home/bloc/home_bloc.dart'
-    as _i556;
+import 'package:hoshmand_code_challenge/presentation/home/cubit/home_cubit.dart'
+    as _i653;
 import 'package:injectable/injectable.dart' as _i526;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -46,8 +46,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i754.RepositoryImpl(gh<_i169.ApiRepository>()));
     gh.lazySingleton<_i877.GetAllUnitsUseCase>(
         () => _i877.GetAllUnitsUseCase(gh<_i538.Repository>()));
-    gh.factory<_i556.HomeBloc>(
-        () => _i556.HomeBloc(gh<_i877.GetAllUnitsUseCase>()));
+    gh.factory<_i653.HomeCubit>(
+        () => _i653.HomeCubit(gh<_i877.GetAllUnitsUseCase>()));
     return this;
   }
 }
