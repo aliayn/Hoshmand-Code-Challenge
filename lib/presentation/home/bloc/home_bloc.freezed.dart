@@ -20,18 +20,21 @@ mixin _$HomeEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() retry,
+    required TResult Function(UnitModel unitList) unitChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? retry,
+    TResult? Function(UnitModel unitList)? unitChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? retry,
+    TResult Function(UnitModel unitList)? unitChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$HomeEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Retry value) retry,
+    required TResult Function(_UnitChanged value) unitChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Retry value)? retry,
+    TResult? Function(_UnitChanged value)? unitChanged,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Retry value)? retry,
+    TResult Function(_UnitChanged value)? unitChanged,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,6 +125,7 @@ class _$StartedImpl implements _Started {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() retry,
+    required TResult Function(UnitModel unitList) unitChanged,
   }) {
     return started();
   }
@@ -128,6 +135,7 @@ class _$StartedImpl implements _Started {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? retry,
+    TResult? Function(UnitModel unitList)? unitChanged,
   }) {
     return started?.call();
   }
@@ -137,6 +145,7 @@ class _$StartedImpl implements _Started {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? retry,
+    TResult Function(UnitModel unitList)? unitChanged,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -150,6 +159,7 @@ class _$StartedImpl implements _Started {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Retry value) retry,
+    required TResult Function(_UnitChanged value) unitChanged,
   }) {
     return started(this);
   }
@@ -159,6 +169,7 @@ class _$StartedImpl implements _Started {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Retry value)? retry,
+    TResult? Function(_UnitChanged value)? unitChanged,
   }) {
     return started?.call(this);
   }
@@ -168,6 +179,7 @@ class _$StartedImpl implements _Started {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Retry value)? retry,
+    TResult Function(_UnitChanged value)? unitChanged,
     required TResult orElse(),
   }) {
     if (started != null) {
@@ -224,6 +236,7 @@ class _$RetryImpl implements _Retry {
   TResult when<TResult extends Object?>({
     required TResult Function() started,
     required TResult Function() retry,
+    required TResult Function(UnitModel unitList) unitChanged,
   }) {
     return retry();
   }
@@ -233,6 +246,7 @@ class _$RetryImpl implements _Retry {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? started,
     TResult? Function()? retry,
+    TResult? Function(UnitModel unitList)? unitChanged,
   }) {
     return retry?.call();
   }
@@ -242,6 +256,7 @@ class _$RetryImpl implements _Retry {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? started,
     TResult Function()? retry,
+    TResult Function(UnitModel unitList)? unitChanged,
     required TResult orElse(),
   }) {
     if (retry != null) {
@@ -255,6 +270,7 @@ class _$RetryImpl implements _Retry {
   TResult map<TResult extends Object?>({
     required TResult Function(_Started value) started,
     required TResult Function(_Retry value) retry,
+    required TResult Function(_UnitChanged value) unitChanged,
   }) {
     return retry(this);
   }
@@ -264,6 +280,7 @@ class _$RetryImpl implements _Retry {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Started value)? started,
     TResult? Function(_Retry value)? retry,
+    TResult? Function(_UnitChanged value)? unitChanged,
   }) {
     return retry?.call(this);
   }
@@ -273,6 +290,7 @@ class _$RetryImpl implements _Retry {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Started value)? started,
     TResult Function(_Retry value)? retry,
+    TResult Function(_UnitChanged value)? unitChanged,
     required TResult orElse(),
   }) {
     if (retry != null) {
@@ -287,6 +305,165 @@ abstract class _Retry implements HomeEvent {
 }
 
 /// @nodoc
+abstract class _$$UnitChangedImplCopyWith<$Res> {
+  factory _$$UnitChangedImplCopyWith(
+          _$UnitChangedImpl value, $Res Function(_$UnitChangedImpl) then) =
+      __$$UnitChangedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({UnitModel unitList});
+
+  $UnitModelCopyWith<$Res> get unitList;
+}
+
+/// @nodoc
+class __$$UnitChangedImplCopyWithImpl<$Res>
+    extends _$HomeEventCopyWithImpl<$Res, _$UnitChangedImpl>
+    implements _$$UnitChangedImplCopyWith<$Res> {
+  __$$UnitChangedImplCopyWithImpl(
+      _$UnitChangedImpl _value, $Res Function(_$UnitChangedImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? unitList = null,
+  }) {
+    return _then(_$UnitChangedImpl(
+      null == unitList
+          ? _value.unitList
+          : unitList // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
+    ));
+  }
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UnitModelCopyWith<$Res> get unitList {
+    return $UnitModelCopyWith<$Res>(_value.unitList, (value) {
+      return _then(_value.copyWith(unitList: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$UnitChangedImpl implements _UnitChanged {
+  const _$UnitChangedImpl(this.unitList);
+
+  @override
+  final UnitModel unitList;
+
+  @override
+  String toString() {
+    return 'HomeEvent.unitChanged(unitList: $unitList)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UnitChangedImpl &&
+            (identical(other.unitList, unitList) ||
+                other.unitList == unitList));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, unitList);
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UnitChangedImplCopyWith<_$UnitChangedImpl> get copyWith =>
+      __$$UnitChangedImplCopyWithImpl<_$UnitChangedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() started,
+    required TResult Function() retry,
+    required TResult Function(UnitModel unitList) unitChanged,
+  }) {
+    return unitChanged(unitList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? started,
+    TResult? Function()? retry,
+    TResult? Function(UnitModel unitList)? unitChanged,
+  }) {
+    return unitChanged?.call(unitList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? started,
+    TResult Function()? retry,
+    TResult Function(UnitModel unitList)? unitChanged,
+    required TResult orElse(),
+  }) {
+    if (unitChanged != null) {
+      return unitChanged(unitList);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Started value) started,
+    required TResult Function(_Retry value) retry,
+    required TResult Function(_UnitChanged value) unitChanged,
+  }) {
+    return unitChanged(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Started value)? started,
+    TResult? Function(_Retry value)? retry,
+    TResult? Function(_UnitChanged value)? unitChanged,
+  }) {
+    return unitChanged?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Started value)? started,
+    TResult Function(_Retry value)? retry,
+    TResult Function(_UnitChanged value)? unitChanged,
+    required TResult orElse(),
+  }) {
+    if (unitChanged != null) {
+      return unitChanged(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UnitChanged implements HomeEvent {
+  const factory _UnitChanged(final UnitModel unitList) = _$UnitChangedImpl;
+
+  UnitModel get unitList;
+
+  /// Create a copy of HomeEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UnitChangedImplCopyWith<_$UnitChangedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$HomeState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -294,6 +471,7 @@ mixin _$HomeState {
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function(List<UnitModel> units) unitList,
+    required TResult Function(UnitModel unitList) setUnitContent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -302,6 +480,7 @@ mixin _$HomeState {
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function(List<UnitModel> units)? unitList,
+    TResult? Function(UnitModel unitList)? setUnitContent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -310,6 +489,7 @@ mixin _$HomeState {
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function(List<UnitModel> units)? unitList,
+    TResult Function(UnitModel unitList)? setUnitContent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -319,6 +499,7 @@ mixin _$HomeState {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_UnitList value) unitList,
+    required TResult Function(_SetUnitContent value) setUnitContent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -327,6 +508,7 @@ mixin _$HomeState {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_UnitList value)? unitList,
+    TResult? Function(_SetUnitContent value)? setUnitContent,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -335,6 +517,7 @@ mixin _$HomeState {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_UnitList value)? unitList,
+    TResult Function(_SetUnitContent value)? setUnitContent,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -405,6 +588,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function(List<UnitModel> units) unitList,
+    required TResult Function(UnitModel unitList) setUnitContent,
   }) {
     return initial();
   }
@@ -416,6 +600,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function(List<UnitModel> units)? unitList,
+    TResult? Function(UnitModel unitList)? setUnitContent,
   }) {
     return initial?.call();
   }
@@ -427,6 +612,7 @@ class _$InitialImpl implements _Initial {
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function(List<UnitModel> units)? unitList,
+    TResult Function(UnitModel unitList)? setUnitContent,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -442,6 +628,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_UnitList value) unitList,
+    required TResult Function(_SetUnitContent value) setUnitContent,
   }) {
     return initial(this);
   }
@@ -453,6 +640,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_UnitList value)? unitList,
+    TResult? Function(_SetUnitContent value)? setUnitContent,
   }) {
     return initial?.call(this);
   }
@@ -464,6 +652,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_UnitList value)? unitList,
+    TResult Function(_SetUnitContent value)? setUnitContent,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -522,6 +711,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function(List<UnitModel> units) unitList,
+    required TResult Function(UnitModel unitList) setUnitContent,
   }) {
     return loading();
   }
@@ -533,6 +723,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function(List<UnitModel> units)? unitList,
+    TResult? Function(UnitModel unitList)? setUnitContent,
   }) {
     return loading?.call();
   }
@@ -544,6 +735,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function(List<UnitModel> units)? unitList,
+    TResult Function(UnitModel unitList)? setUnitContent,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -559,6 +751,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_UnitList value) unitList,
+    required TResult Function(_SetUnitContent value) setUnitContent,
   }) {
     return loading(this);
   }
@@ -570,6 +763,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_UnitList value)? unitList,
+    TResult? Function(_SetUnitContent value)? setUnitContent,
   }) {
     return loading?.call(this);
   }
@@ -581,6 +775,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_UnitList value)? unitList,
+    TResult Function(_SetUnitContent value)? setUnitContent,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -666,6 +861,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function(List<UnitModel> units) unitList,
+    required TResult Function(UnitModel unitList) setUnitContent,
   }) {
     return error(message);
   }
@@ -677,6 +873,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function(List<UnitModel> units)? unitList,
+    TResult? Function(UnitModel unitList)? setUnitContent,
   }) {
     return error?.call(message);
   }
@@ -688,6 +885,7 @@ class _$ErrorImpl implements _Error {
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function(List<UnitModel> units)? unitList,
+    TResult Function(UnitModel unitList)? setUnitContent,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -703,6 +901,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_UnitList value) unitList,
+    required TResult Function(_SetUnitContent value) setUnitContent,
   }) {
     return error(this);
   }
@@ -714,6 +913,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_UnitList value)? unitList,
+    TResult? Function(_SetUnitContent value)? setUnitContent,
   }) {
     return error?.call(this);
   }
@@ -725,6 +925,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_UnitList value)? unitList,
+    TResult Function(_SetUnitContent value)? setUnitContent,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -824,6 +1025,7 @@ class _$UnitListImpl implements _UnitList {
     required TResult Function() loading,
     required TResult Function(String message) error,
     required TResult Function(List<UnitModel> units) unitList,
+    required TResult Function(UnitModel unitList) setUnitContent,
   }) {
     return unitList(units);
   }
@@ -835,6 +1037,7 @@ class _$UnitListImpl implements _UnitList {
     TResult? Function()? loading,
     TResult? Function(String message)? error,
     TResult? Function(List<UnitModel> units)? unitList,
+    TResult? Function(UnitModel unitList)? setUnitContent,
   }) {
     return unitList?.call(units);
   }
@@ -846,6 +1049,7 @@ class _$UnitListImpl implements _UnitList {
     TResult Function()? loading,
     TResult Function(String message)? error,
     TResult Function(List<UnitModel> units)? unitList,
+    TResult Function(UnitModel unitList)? setUnitContent,
     required TResult orElse(),
   }) {
     if (unitList != null) {
@@ -861,6 +1065,7 @@ class _$UnitListImpl implements _UnitList {
     required TResult Function(_Loading value) loading,
     required TResult Function(_Error value) error,
     required TResult Function(_UnitList value) unitList,
+    required TResult Function(_SetUnitContent value) setUnitContent,
   }) {
     return unitList(this);
   }
@@ -872,6 +1077,7 @@ class _$UnitListImpl implements _UnitList {
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Error value)? error,
     TResult? Function(_UnitList value)? unitList,
+    TResult? Function(_SetUnitContent value)? setUnitContent,
   }) {
     return unitList?.call(this);
   }
@@ -883,6 +1089,7 @@ class _$UnitListImpl implements _UnitList {
     TResult Function(_Loading value)? loading,
     TResult Function(_Error value)? error,
     TResult Function(_UnitList value)? unitList,
+    TResult Function(_SetUnitContent value)? setUnitContent,
     required TResult orElse(),
   }) {
     if (unitList != null) {
@@ -901,5 +1108,178 @@ abstract class _UnitList implements HomeState {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$UnitListImplCopyWith<_$UnitListImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SetUnitContentImplCopyWith<$Res> {
+  factory _$$SetUnitContentImplCopyWith(_$SetUnitContentImpl value,
+          $Res Function(_$SetUnitContentImpl) then) =
+      __$$SetUnitContentImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({UnitModel unitList});
+
+  $UnitModelCopyWith<$Res> get unitList;
+}
+
+/// @nodoc
+class __$$SetUnitContentImplCopyWithImpl<$Res>
+    extends _$HomeStateCopyWithImpl<$Res, _$SetUnitContentImpl>
+    implements _$$SetUnitContentImplCopyWith<$Res> {
+  __$$SetUnitContentImplCopyWithImpl(
+      _$SetUnitContentImpl _value, $Res Function(_$SetUnitContentImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? unitList = null,
+  }) {
+    return _then(_$SetUnitContentImpl(
+      null == unitList
+          ? _value.unitList
+          : unitList // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
+    ));
+  }
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $UnitModelCopyWith<$Res> get unitList {
+    return $UnitModelCopyWith<$Res>(_value.unitList, (value) {
+      return _then(_value.copyWith(unitList: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _$SetUnitContentImpl implements _SetUnitContent {
+  const _$SetUnitContentImpl(this.unitList);
+
+  @override
+  final UnitModel unitList;
+
+  @override
+  String toString() {
+    return 'HomeState.setUnitContent(unitList: $unitList)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SetUnitContentImpl &&
+            (identical(other.unitList, unitList) ||
+                other.unitList == unitList));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, unitList);
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetUnitContentImplCopyWith<_$SetUnitContentImpl> get copyWith =>
+      __$$SetUnitContentImplCopyWithImpl<_$SetUnitContentImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(String message) error,
+    required TResult Function(List<UnitModel> units) unitList,
+    required TResult Function(UnitModel unitList) setUnitContent,
+  }) {
+    return setUnitContent(this.unitList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(String message)? error,
+    TResult? Function(List<UnitModel> units)? unitList,
+    TResult? Function(UnitModel unitList)? setUnitContent,
+  }) {
+    return setUnitContent?.call(this.unitList);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(String message)? error,
+    TResult Function(List<UnitModel> units)? unitList,
+    TResult Function(UnitModel unitList)? setUnitContent,
+    required TResult orElse(),
+  }) {
+    if (setUnitContent != null) {
+      return setUnitContent(this.unitList);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Error value) error,
+    required TResult Function(_UnitList value) unitList,
+    required TResult Function(_SetUnitContent value) setUnitContent,
+  }) {
+    return setUnitContent(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Error value)? error,
+    TResult? Function(_UnitList value)? unitList,
+    TResult? Function(_SetUnitContent value)? setUnitContent,
+  }) {
+    return setUnitContent?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Error value)? error,
+    TResult Function(_UnitList value)? unitList,
+    TResult Function(_SetUnitContent value)? setUnitContent,
+    required TResult orElse(),
+  }) {
+    if (setUnitContent != null) {
+      return setUnitContent(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _SetUnitContent implements HomeState {
+  const factory _SetUnitContent(final UnitModel unitList) =
+      _$SetUnitContentImpl;
+
+  UnitModel get unitList;
+
+  /// Create a copy of HomeState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$SetUnitContentImplCopyWith<_$SetUnitContentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

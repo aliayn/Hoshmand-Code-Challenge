@@ -6,11 +6,9 @@ import '../utils/extensions.dart';
 
 final Color _lightPrimary = HexColor.fromHex('#FCD34B');
 final Color _lightAccent = HexColor.fromHex('#FCD34B');
-final Color _lightBG = HexColor.fromHex('#FCD34B');
 final Color _lightBodyTextColor = HexColor.fromHex('#C89358');
 final Color _lightTextColor = HexColor.fromHex('#1E2329');
 final Color _lightGrayTextColor = HexColor.fromHex('#1E2329');
-final Color _lightErrorColor = HexColor.fromHex('#BA2A47');
 final Color _lightDividerColor = HexColor.fromHex('#C2CBD7');
 
 ThemeData get lightTheme => ThemeData(
