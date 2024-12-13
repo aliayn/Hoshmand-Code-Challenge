@@ -7,7 +7,6 @@ class ApiRepository {
   ApiRepository(this.apiService);
 
   Future<List<UnitModel>> getAllUnits() async {
-    // return apiService.getAllUnits();
-    throw UnimplementedError();
+    return apiService.getAllUnits();
   }
 }

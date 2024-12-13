@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hoshmand_code_challenge/data/model/unit_model/unit_model.dart';
+import 'package:shimmer/shimmer.dart';
 
 class ProgressWheel extends StatefulWidget {
   final List<UnitModel> units;
@@ -46,43 +48,70 @@ class _ProgressWheelState extends State<ProgressWheel> {
         final screenWidth = constraints.maxWidth;
         final itemWidth = screenWidth * 0.2;
 
-        return RepaintBoundary(
-          child: SizedBox(
-            height: widget.height,
-            child: Transform(
-              alignment: Alignment.center,
-              transform: Matrix4.identity()
-                ..setEntry(3, 2, 0.001)
-                ..rotateX(-0.5),
-              child: RotatedBox(
-                quarterTurns: 3,
-                child: ListWheelScrollView.useDelegate(
-                  controller: _controller,
-                  itemExtent: itemWidth,
-                  perspective: 0.005,
-                  diameterRatio: 2.0,
-                  physics: const FixedExtentScrollPhysics(),
-                  clipBehavior: Clip.none,
-                  renderChildrenOutsideViewport: false,
-                  onSelectedItemChanged: (index) {
-                    setState(() {
-                      _selectedIndex = index % widget.units.length;
-                    });
-                    widget.onSelect(widget.units[_selectedIndex]);
-                  },
-                  childDelegate: ListWheelChildLoopingListDelegate(
-                    children: List.generate(
-                      widget.units.length * 200,
-                      (index) {
-                        final realIndex = index % widget.units.length;
-                        return _buildWheelItem(realIndex);
-                      },
+        return Stack(
+          children: [
+            ClipPath(
+              clipper: OvalTopBorderClipper(),
+              child: Container(
+                height: 160,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.15),
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                      spreadRadius: 2,
                     ),
-                  ),
+                  ],
                 ),
               ),
             ),
-          ),
+            Padding(
+              padding: const EdgeInsets.only(top: 60),
+              child: RepaintBoundary(
+                child: widget.isLoading
+                    ? _buildShimmerWheel()
+                    : SizedBox(
+                        height: widget.height,
+                        child: Transform(
+                          alignment: Alignment.center,
+                          transform: Matrix4.identity()
+                            ..setEntry(3, 2, 0.001)
+                            ..rotateX(-0.5),
+                          child: RotatedBox(
+                            quarterTurns: 3,
+                            child: ListWheelScrollView.useDelegate(
+                              controller: _controller,
+                              itemExtent: itemWidth,
+                              perspective: 0.005,
+                              diameterRatio: 2.0,
+                              physics: const FixedExtentScrollPhysics(),
+                              clipBehavior: Clip.none,
+                              renderChildrenOutsideViewport: false,
+                              onSelectedItemChanged: (index) {
+                                setState(() {
+                                  _selectedIndex = index % widget.units.length;
+                                });
+                                widget.onSelect(widget.units[_selectedIndex]);
+                              },
+                              childDelegate: ListWheelChildLoopingListDelegate(
+                                children: List.generate(
+                                  widget.units.length * 200,
+                                  (index) {
+                                    final realIndex =
+                                        index % widget.units.length;
+                                    return _buildWheelItem(realIndex);
+                                  },
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+              ),
+            ),
+          ],
         );
       },
     );
@@ -171,6 +200,81 @@ class _ProgressWheelState extends State<ProgressWheel> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildShimmerWheel() {
+    return SizedBox(
+      height: widget.height,
+      child: Transform(
+        alignment: Alignment.center,
+        transform: Matrix4.identity()
+          ..setEntry(3, 2, 0.001)
+          ..rotateX(-0.5),
+        child: RotatedBox(
+          quarterTurns: 3,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: 5, // Number of shimmer items
+            itemBuilder: (context, index) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: RotatedBox(
+                quarterTurns: 1,
+                child: Shimmer.fromColors(
+                  baseColor: Colors.grey.shade300,
+                  highlightColor: Colors.grey.shade100,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          Container(
+                            width: 64,
+                            height: 64,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: Colors.grey.shade200,
+                                width: 2,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 58,
+                            height: 58,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.05),
+                                  blurRadius: 4,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Container(
+                        width: 60,
+                        height: 14,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(7),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

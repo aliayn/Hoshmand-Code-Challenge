@@ -10,7 +10,7 @@ class HomeScreen extends BaseStateless {
 
   @override
   Widget builder(BuildContext context) => Scaffold(
-        backgroundColor: Colors.grey.shade300,
+        backgroundColor: Colors.white,
         body: SafeArea(
           child: Column(
             children: [
