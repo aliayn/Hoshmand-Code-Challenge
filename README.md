@@ -1,16 +1,43 @@
-# hoshmand_code_challenge
+# Hoshmand Code Challenge
 
-A new Flutter project.
+A Flutter project demonstrating unit management and state handling.
+
+## Features
+
+- Display list of units with content area
+- Loading state management with progress wheel
+- State management using Cubit pattern
+- Integration testing with widget tests
+
+## Technical Details
+
+The project implements:
+- BLoC/Cubit architecture for state management
+- GetIt for dependency injection
+- Widget testing with Flutter test framework
+- Custom test bindings for test data management
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. Clone the repository
+2. Run `flutter pub get` to install dependencies
+3. Run `flutter test` to execute the test suite
+4. Run `flutter run` to start the application
 
-A few resources to get you started if this is your first Flutter project:
+## Testing
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
+The project includes widget tests that verify:
+- Initial screen loading
+- Progress wheel visibility
+- Unit content area display
+- Loading state management
+
+## Dependencies
+
+- flutter_bloc: State management
+- get_it: Dependency injection
+- flutter_test: Testing framework
+
+For more Flutter resources:
+- [Flutter Documentation](https://docs.flutter.dev/)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
