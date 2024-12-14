@@ -1,4 +1,4 @@
-import 'package:hoshmand_code_challenge/core/locale/fr_language.dart';
+import 'package:hoshmand_code_challenge/core/locale/fa_language.dart';
 
 import 'en_language.dart';
 
