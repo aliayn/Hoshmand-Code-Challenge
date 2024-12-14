@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../helpers/test_binding.dart';
+import '../helpers/dependency_setup.dart';
 import './step/i_am_on_the_home_screen.dart';
 import './step/the_screen_loads.dart';
 import './step/i_should_see_the_progress_wheel.dart';
@@ -23,6 +24,11 @@ import './step/it_should_attempt_to_load_units_again.dart';
 void main() {
   CustomTestBinding.instance;  // Initialize the custom binding
   
+  setUp(() async {
+    // Setup dependencies before each test
+    await setupTestDependencies();
+  });
+
   group('''Home Screen''', () {
     testWidgets('''Initial load''', (tester) async {
       await iAmOnTheHomeScreen(tester);

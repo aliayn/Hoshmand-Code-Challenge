@@ -6,12 +6,14 @@ import '../../helpers/test_binding.dart';
 /// Usage: I have a list of units
 Future<void> iHaveAListOfUnits(WidgetTester tester) async {
   final units = List.generate(
-    3,
+    5,
     (index) => UnitModel(
+      id: 'unit_$index',
       name: 'Unit $index',
       unitIcon: 'https://example.com/icon$index.svg',
       hamdarsUserCurrentUnitLevelPoint: (index * 10).toInt(),
       hamdarsUserMaxUnitLevelPoint: (index * 100).toInt(),
+      hamdarsQUnitLearningContentDtos: [],
     ),
   );
   final binding = CustomTestBinding.instance;
